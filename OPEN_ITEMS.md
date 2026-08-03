@@ -56,6 +56,11 @@ build/deploy decisions awaiting the owner.
     numbers because none were provided. Supply one line (org + a real outcome) to
     match the healthcare and payments cards.
 
+14. **"What I got wrong" removed from all pages by owner direction (2026-08-03)** —
+    brief §4 made the block mandatory per case study. The content survives at
+    `/retro/` but is intentionally unlinked from the site. If the §4 requirement
+    should win, re-add a link (footer suggestion: "Build journal →").
+
 ## Build decisions made under autonomy (flagging, not asking)
 
 - Site name/wordmark is simply "Siddarth Nyati"; POC 5 kept the working name

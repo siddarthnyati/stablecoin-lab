@@ -43,6 +43,6 @@
       if (paused) return;
       i = (i + 1) % imgs.length;
       show(i);
-    }, 3800);
+    }, 2000);
   });
 })();
