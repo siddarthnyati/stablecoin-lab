@@ -22,9 +22,7 @@
       Siddarth Nyati
     </a>
     <nav class="site-nav" aria-label="Site">
-      <a href="../stablecoin-settle/">Parity</a>
-      <a href="../../from-card-rails/">From card rails</a>
-      <a href="../../how-i-run-programs/">How I run programs</a>
+      <a href="../../#work">Portfolio</a>
       <a href="../../about/">About</a>
     </nav>
   </div>
@@ -33,13 +31,18 @@
 <main id="main">
   <div class="container">
 
-    <header class="case-header" style="padding-bottom: 0;">
+    <p class="crumb"><a href="../../#work">&larr; Portfolio</a></p>
+
+    <header class="case-header" style="padding-top: var(--s4); padding-bottom: 0;">
       <p class="eyebrow"><span class="num">POC 2</span> &middot; Stablecoin rewards &amp; acceptance</p>
       <h1>CryptoPos</h1>
       <p class="lede">Merchants and buyers both get paid to move money on the new rail &mdash; with the economics visible at the counter, not at month-end.</p>
 
-      <figure class="shot-hero">
-        <img src="../../assets/shots/rewards.jpg" width="960" height="600" alt="CryptoPos prototype: Merchant Mode for accepting crypto and configuring rewards, and a User Wallet for paying and earning. BTC, ETH, USDC, SOL. Demo data.">
+      <figure class="shot-hero slides">
+        <img src="../../assets/shots/rewards-1.jpg" width="960" height="600" alt="CryptoPos merchant dashboard — point of sale, accepted assets, reward rate. Demo data." class="on">
+        <img src="../../assets/shots/rewards-2.jpg" width="960" height="600" alt="CryptoPos user wallet — balances, payments, rewards earned. Demo data." loading="lazy">
+        <img src="../../assets/shots/rewards-3.jpg" width="960" height="600" alt="CryptoPos mode select — Merchant Mode and User Wallet. Demo data." loading="lazy">
+        <span class="dots-nav" aria-hidden="true"><i class="on"></i><i></i><i></i></span>
         <p class="cta-row">
           <a class="btn primary" href="https://lovable.dev/preview/2PPeMp5KfySdjx2olWqeOC2v9u5gUVrz" target="_blank" rel="noopener">Open live prototype &#8599;</a>
           <span class="demo-badge">Concept prototype &mdash; illustrative data</span>
@@ -62,6 +65,11 @@
           <p>Merchants change behaviour when the economics pay for it &mdash; the enriched-data play from card rails: value for basis points, made visible.</p>
         </div>
       </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">The why, in one breath</p>
+      <p style="max-width: var(--prose); font-size: var(--fs-3); line-height: 1.5;">A card swipe quietly pays for fraud checks, refunds and rewards. A crypto payment pays for none of that &mdash; which is why merchants shrug. CryptoPos makes the missing pieces visible and lets the merchant choose them, priced, at the counter.</p>
     </section>
 
     <section class="section">
@@ -103,17 +111,7 @@
     </section>
 
     <section class="section">
-      <p class="eyebrow">What I got wrong &middot; what&rsquo;s next</p>
-      <div class="wrong-block">
-        <h3>What I got wrong</h3>
-        <ul>
-          <li><strong>Led with asset breadth</strong> &mdash; four assets read as ambition; stablecoin-first is the honest architecture.</li>
-          <li><strong>Rewards ignored who pays</strong> &mdash; card-style 2% without card-style interchange to fund it; the margin floor exists because v1 let a demo merchant lose money per sale.</li>
-          <li><strong>Refunds were an afterthought</strong> &mdash; pinning value at sale decides who eats the price move; I should have recognised a loss-allocation question on sight.</li>
-        </ul>
-      </div>
-      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>Next:</strong> run it as a proper program &mdash; small-ticket, high-frequency segment, day-90 north star as the gate. That exercise is <a href="../../how-i-run-programs/">its own page</a>.</p>
-      <p style="margin-top: var(--s3);"><a class="btn" href="https://lovable.dev/preview/2PPeMp5KfySdjx2olWqeOC2v9u5gUVrz" target="_blank" rel="noopener">Open the live prototype &#8599;</a></p>
+      <p style="display:flex; gap: var(--s2); flex-wrap: wrap;"><a class="btn primary" href="https://lovable.dev/preview/2PPeMp5KfySdjx2olWqeOC2v9u5gUVrz" target="_blank" rel="noopener">Open the live prototype &#8599;</a> <a class="btn" href="../../retro/">What I got wrong &rarr;</a></p>
     </section>
 
   </div>

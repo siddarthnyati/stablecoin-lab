@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What I got wrong — a build journal</title>
+<meta name="description" content="The mistakes behind five stablecoin POCs, kept on purpose. The highest-credibility page on this site.">
+<meta property="og:title" content="What I got wrong — a build journal">
+<meta property="og:description" content="Wrong benchmarks, manipulable oracles, rewards nobody funded — and what each error taught.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="../assets/og.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="wordmark" href="../" aria-label="Siddarth Nyati — home">
+      <svg class="tick" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="2.5" x2="18" y2="2.5" stroke="#e7eaee" stroke-width="1.6"/><line x1="0" y1="7.5" x2="18" y2="7.5" stroke="#7d8590" stroke-width="1.6" stroke-dasharray="2 3"/><circle cx="12" cy="2.5" r="2.2" fill="#e2b33c"/></svg>
+      Siddarth Nyati
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="../#work">Portfolio</a>
+      <a href="../about/">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <p class="crumb"><a href="../#work">&larr; Portfolio</a></p>
+
+    <header class="case-header" style="padding-top: var(--s4);">
+      <p class="eyebrow">Build journal</p>
+      <h1 style="max-width: 18ch;">What I got wrong</h1>
+      <p class="lede">Kept on purpose, in one place. Every POC on this site made at least one mistake worth admitting &mdash; and each one changed the design that shipped in the prototype.</p>
+      <p class="page-badge"><span class="demo-badge">Concept prototypes &mdash; illustrative data</span></p>
+    </header>
+
+    <section class="section" style="padding-top: var(--s4);">
+      <div class="wrong-block">
+        <h2 style="font-size: var(--fs-3);"><a href="../work/stablecoin-settle/">Parity</a></h2>
+        <ul>
+          <li><strong>I benchmarked against headline interchange.</strong> Wrong benchmark &mdash; interchange <em>buys</em> fraud screening, authentication, disputes and a funds guarantee. Pricing the buy-back shrank the gap and made the model honest.</li>
+          <li><strong>I treated &ldquo;hold&rdquo; as the cheap path.</strong> Holding is a credit position against the issuer plus depeg exposure &mdash; the treasury surface exists because the settlement console was quietly lying.</li>
+          <li><strong>I assumed the speed story was the chain&rsquo;s to win.</strong> Redemption ends on a wire or ACH leg; the durable advantages are finality and programmability, not speed &mdash; a weaker pitch and a truer one.</li>
+        </ul>
+      </div>
+
+      <div class="wrong-block" style="margin-top: var(--s3);">
+        <h2 style="font-size: var(--fs-3);"><a href="../work/defilend/">DeFiLend</a></h2>
+        <ul>
+          <li><strong>Closed all five gaps at once</strong> &mdash; a demo flex, not a roadmap; a funded version ships the simulator first and makes everything else earn its slot.</li>
+          <li><strong>Automation before trust</strong> &mdash; AI strategies ask users to delegate money before they&rsquo;ve practised moving it; that inverts my own belief.</li>
+          <li><strong>Wrapped stocks hand-wave the hard part</strong> &mdash; the contract is a weekend; securities law and broker integrations are the actual product.</li>
+          <li><strong>Insurance priced as a feature, not a cost</strong> &mdash; premiums eat yield, and I never modelled willingness to pay.</li>
+        </ul>
+      </div>
+
+      <div class="wrong-block" style="margin-top: var(--s3);">
+        <h2 style="font-size: var(--fs-3);"><a href="../work/cryptopos/">CryptoPos</a></h2>
+        <ul>
+          <li><strong>Led with asset breadth</strong> &mdash; four assets read as ambition; stablecoin-first is the honest architecture.</li>
+          <li><strong>Rewards ignored who pays</strong> &mdash; card-style 2% without card-style interchange to fund it; the margin floor exists because v1 let a demo merchant lose money on every sale.</li>
+          <li><strong>Refunds were an afterthought</strong> &mdash; pinning value at sale decides who eats the price move; I should have recognised a loss-allocation question on sight.</li>
+        </ul>
+      </div>
+
+      <div class="wrong-block" style="margin-top: var(--s3);">
+        <h2 style="font-size: var(--fs-3);"><a href="../work/coinbase/">Coinbase, re-read</a></h2>
+        <ul>
+          <li><strong>My first framing said &ldquo;Coinbase doesn&rsquo;t have derivatives&rdquo; &mdash; factually wrong</strong> (US futures since ~2023). Checking the claim reshaped the POC around experience gaps, and made it stronger. Check the claim before you design the fix.</li>
+          <li><strong>Treated prediction markets as a feature</strong> &mdash; event contracts are a licensing and compliance program with a UI on top.</li>
+          <li><strong>Portfolio analysis assumed data users don&rsquo;t have</strong> &mdash; cost basis across wallets and venues; it demos beautifully on demo data, which is exactly the trap.</li>
+        </ul>
+      </div>
+
+      <div class="wrong-block" style="margin-top: var(--s3);">
+        <h2 style="font-size: var(--fs-3);"><a href="../work/nft-lending/">NFT lending</a></h2>
+        <ul>
+          <li><strong>Started with the gallery</strong> &mdash; a beautiful grid with a borrow button, for a product whose actual product is an oracle.</li>
+          <li><strong>Version one used the raw floor price</strong> &mdash; one wash trade moved every loan ceiling in the collection; red-teaming my own oracle should have been step one.</li>
+          <li><strong>Modelled liquidity as a constant</strong> &mdash; the bids that absorb liquidations are correlated with the crash that triggers them.</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: var(--s5); max-width: var(--prose); color: var(--text-dim);">Why keep this page? Because a stablecoin roadmap will be wrong sometimes too, and the teams that admit it early are the ones whose scale/no-scale decisions can be trusted. <a href="../how-i-run-programs/">How I run programs &rarr;</a></p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container inner">
+    <p>Concept prototypes &mdash; illustrative data throughout; nothing shipped, had users, or was commissioned.</p>
+    <p><a href="../#work">Portfolio &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

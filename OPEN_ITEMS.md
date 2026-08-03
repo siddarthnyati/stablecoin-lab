@@ -8,7 +8,14 @@ build/deploy decisions awaiting the owner.
 
 1. **Resume PDF link** — `/about`. No resume file or URL was provided. Add the file
    (e.g. `assets/resume.pdf`) or a link, then replace the marker.
-2. **LinkedIn profile URL** — `/about`. Not provided in the brief; not guessed.
+2. ~~LinkedIn profile URL~~ — resolved 2026-08-03; owner supplied
+   `linkedin.com/in/siddarth-nyati` (now on /about and the homepage footer).
+12. **Timeline dates** — homepage journey uses owner-stated years (2014 engineering,
+    2018 Infosys, 2021 Dartmouth, 2022 Motional). The healthcare-resupply and Visa
+    chapters are shown without years because none were provided — confirm order/dates.
+13. **Infosys attribution** — the tax achievements (600K users/~$10M saved; 71 forms,
+    5M+ users; −30% effort; CSAT +11%) were owner-supplied without an employer name;
+    they are attributed to the 2018 Infosys chapter by inference. Confirm.
 
 ## Unsourced items handled without on-page markers
 

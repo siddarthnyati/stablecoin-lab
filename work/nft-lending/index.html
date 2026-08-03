@@ -22,9 +22,7 @@
       Siddarth Nyati
     </a>
     <nav class="site-nav" aria-label="Site">
-      <a href="../stablecoin-settle/">Parity</a>
-      <a href="../../from-card-rails/">From card rails</a>
-      <a href="../../how-i-run-programs/">How I run programs</a>
+      <a href="../../#work">Portfolio</a>
       <a href="../../about/">About</a>
     </nav>
   </div>
@@ -33,13 +31,18 @@
 <main id="main">
   <div class="container">
 
-    <header class="case-header" style="padding-bottom: 0;">
+    <p class="crumb"><a href="../../#work">&larr; Portfolio</a></p>
+
+    <header class="case-header" style="padding-top: var(--s4); padding-bottom: 0;">
       <p class="eyebrow"><span class="num">POC 4</span> &middot; NFT marketplace &amp; credit</p>
       <h1>NFT lending</h1>
       <p class="lede">Lend against an asset with no reliable price, and the interface is the least of your problems.</p>
 
-      <figure class="shot-hero">
-        <img src="../../assets/shots/nft.jpg" width="960" height="600" alt="NFT marketplace prototype: bid, buy and collect rare digital art, with live auctions and demo trading stats. All figures illustrative.">
+      <figure class="shot-hero slides">
+        <img src="../../assets/shots/nft-1.jpg" width="960" height="600" alt="NFT marketplace prototype home — bid, buy and collect. Demo data." class="on">
+        <img src="../../assets/shots/nft-2.jpg" width="960" height="600" alt="NFT marketplace browse screen — collections grid, demo data." loading="lazy">
+        <img src="../../assets/shots/nft-3.jpg" width="960" height="600" alt="NFT live auctions screen — bidding in progress, demo data." loading="lazy">
+        <span class="dots-nav" aria-hidden="true"><i class="on"></i><i></i><i></i></span>
         <p class="cta-row">
           <a class="btn primary" href="https://lovable.dev/preview/un4p3mBj7gU0PxBceKTH09RP5wwAmbhn" target="_blank" rel="noopener">Open live prototype &#8599;</a>
           <span class="demo-badge">Concept prototype &mdash; illustrative data</span>
@@ -69,23 +72,23 @@
       <h2 style="max-width: 26ch;">A lending book that admits what it doesn&rsquo;t know.</h2>
       <div class="gapmap" style="margin-top: var(--s3);">
         <div class="g-row">
-          <span class="g-gap">Oracle</span><span class="g-arrow">&rarr;</span>
-          <span class="g-feat">Trimmed median of realised sales</span>
-          <span class="g-why">raw floor shown, never trusted &middot; resists wash trades and spoofed floors</span>
+          <span class="g-gap">The price</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">What it actually sold for</span>
+          <span class="g-why">not the listed &ldquo;floor&rdquo; &mdash; listings are easy to fake, sales aren&rsquo;t</span>
         </div>
         <div class="g-row">
-          <span class="g-gap">LTV</span><span class="g-arrow">&rarr;</span>
-          <span class="g-feat">Set per collection by exit math</span>
-          <span class="g-why">sparse, volatile histories produce low ceilings automatically &middot; max 35% (demo)</span>
+          <span class="g-gap">The loan size</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Set by how fast it can sell</span>
+          <span class="g-why">rarely-traded art means smaller loans, automatically &middot; 35&cent; per $1 max (demo)</span>
         </div>
         <div class="g-row">
-          <span class="g-gap">Liquidation</span><span class="g-arrow">&rarr;</span>
-          <span class="g-feat">Designed before the first loan</span>
-          <span class="g-why">committed backstop bids + descending auction with a published clock</span>
+          <span class="g-gap">The exit</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">The sale is planned before the loan</span>
+          <span class="g-why">pre-committed buyers and an auction with a public countdown &mdash; no fire-sale improvisation</span>
         </div>
         <div class="g-row">
-          <span class="g-gap">Bad debt</span><span class="g-arrow">&rarr;</span>
-          <span class="g-feat">First-class metric on the book screen</span>
+          <span class="g-gap">The honest number</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Bad debt, on the front page</span>
           <span class="g-why">a lender that hides its bad-debt rate is marketing &middot; 1.1% (demo)</span>
         </div>
       </div>
@@ -98,17 +101,7 @@
     </section>
 
     <section class="section">
-      <p class="eyebrow">What I got wrong &middot; what&rsquo;s next</p>
-      <div class="wrong-block">
-        <h3>What I got wrong</h3>
-        <ul>
-          <li><strong>Started with the gallery</strong> &mdash; a beautiful grid with a borrow button, for a product whose actual product is an oracle.</li>
-          <li><strong>Version one used the raw floor price</strong> &mdash; one wash trade moved every LTV in the collection; red-teaming my own oracle should have been step one.</li>
-          <li><strong>Modelled liquidity as a constant</strong> &mdash; the bids that absorb liquidations are correlated with the crash that triggers them.</li>
-        </ul>
-      </div>
-      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>Next:</strong> backtest the oracle against public sale histories and publish the mark-vs-realised error; stress the auction against a simulated cluster of simultaneous liquidations &mdash; the scenario the product exists for.</p>
-      <p style="margin-top: var(--s3);"><a class="btn" href="https://lovable.dev/preview/un4p3mBj7gU0PxBceKTH09RP5wwAmbhn" target="_blank" rel="noopener">Open the live prototype &#8599;</a></p>
+      <p style="display:flex; gap: var(--s2); flex-wrap: wrap;"><a class="btn primary" href="https://lovable.dev/preview/un4p3mBj7gU0PxBceKTH09RP5wwAmbhn" target="_blank" rel="noopener">Open the live prototype &#8599;</a> <a class="btn" href="../../retro/">What I got wrong &rarr;</a></p>
     </section>
 
   </div>
