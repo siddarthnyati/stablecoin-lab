@@ -70,3 +70,13 @@ build/deploy decisions awaiting the owner.
   consistently everywhere, including the favicon and OG image.
 - The Coinbase case study's "what I got wrong" openly includes the corrected
   derivatives claim, per brief §4's warning — treated as a feature, not a bug.
+
+15. **Honesty badge removed site-wide by owner direction (2026-08-03)** — brief §7
+    required the "Concept prototype — illustrative data" badge on every screen.
+    Removed everywhere per owner; the footer disclosure line ("Concept prototypes
+    with illustrative data throughout — nothing shipped, had users, or was
+    commissioned") remains on every page and now carries the §7 duty alone.
+    The /about "two rules" paragraph was also removed by owner direction.
+16. **Visa (Cardinal/DCAP) and Motional achievement details** are owner-supplied
+    resume content, published as provided. Confirm public-shareability of the
+    Cardinal/DCAP program names and figures (8B+, ~5%, 280bps, 50bps, 30% MoM).

@@ -429,6 +429,24 @@ a.subcard:hover { border-color: var(--border-strong); transform: translateY(-1px
 .deck-panel[hidden] { display: none; }
 .deck-nav { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding: var(--s2) var(--s3); font-family: var(--sans); font-size: var(--fs-0); color: var(--text-faint); }
 
+/* default live-prototype embed, cropped to hide the share-page chrome */
+.proto-crop {
+  position: relative; overflow: hidden;
+  height: min(78vh, 720px);
+  border-radius: 8px;
+}
+.proto-crop iframe {
+  position: absolute; top: -57px; left: 0; border: 0;
+  width: calc(100% + 350px);
+  height: calc(100% + 57px);
+  background: #0e1013;
+}
+@media (max-width: 760px) {
+  .proto-crop { height: 70vh; }
+  .proto-crop iframe { width: 100%; }
+}
+.proto-open { font-family: var(--sans); font-size: var(--fs-1); margin: var(--s2) 0 0; }
+
 /* breadcrumb */
 .crumb { font-family: var(--sans); font-size: var(--fs-1); margin: var(--s4) 0 0; }
 .crumb a { color: var(--text-dim); text-decoration: none; }
