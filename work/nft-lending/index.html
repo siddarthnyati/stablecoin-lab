@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NFT lending — collateral with no reliable price</title>
-<meta name="description" content="Case study: lending against NFTs. The hard parts are oracle design and liquidity, not UI — the card-rails parallel is thin-file underwriting. Concept prototype with illustrative data.">
-<meta property="og:title" content="NFT lending — collateral with no reliable price">
-<meta property="og:description" content="When you can't price the collateral, you price the exit. Oracle design, liquidation liquidity, bad debt.">
+<title>NFT lending — underwrite the exit, not the asset</title>
+<meta name="description" content="Lending against NFTs: oracle design and liquidation liquidity, not UI. Concept prototype with illustrative data.">
+<meta property="og:title" content="NFT lending — underwrite the exit, not the asset">
+<meta property="og:description" content="When you can't price the collateral, price the exit. Oracles, liquidation, bad debt.">
 <meta property="og:type" content="article">
 <meta property="og:image" content="../../assets/og.png">
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
@@ -33,101 +33,67 @@
 <main id="main">
   <div class="container">
 
-    <header class="case-header">
-      <p class="eyebrow"><span class="num">POC 4</span> &middot; Thin-file underwriting</p>
+    <header class="case-header" style="padding-bottom: 0;">
+      <p class="eyebrow"><span class="num">POC 4</span> &middot; NFT marketplace &amp; credit</p>
       <h1>NFT lending</h1>
-      <p class="lede">Lend against an asset with no reliable price and the interface is the least of your problems. The hard parts are oracle design and liquidity &mdash; the same problem card rails call thin-file underwriting: deciding, in real time, on an asset you can&rsquo;t value.</p>
+      <p class="lede">Lend against an asset with no reliable price, and the interface is the least of your problems.</p>
 
-      <figure class="rails-mini" role="img" aria-label="Miniature rails diagram: card rail answers all three questions; stablecoin rail leaves identity and loss allocation open.">
-        <svg viewBox="0 0 560 84" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="24" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">CARD RAIL</text>
-          <line x1="0" y1="36" x2="560" y2="36" stroke="#3a4048" stroke-width="1.2"/>
-          <circle cx="330" cy="36" r="5" fill="#e2b33c"/>
-          <circle cx="420" cy="36" r="5" fill="#e2b33c"/>
-          <circle cx="510" cy="36" r="5" fill="#e2b33c"/>
-          <text x="0" y="60" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">STABLECOIN RAIL</text>
-          <line x1="0" y1="72" x2="560" y2="72" stroke="#3a4048" stroke-width="1.2" stroke-dasharray="4 5"/>
-          <circle cx="330" cy="72" r="5" fill="none" stroke="#e2b33c" stroke-width="1.5"/>
-          <circle cx="420" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
-          <circle cx="510" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
-        </svg>
+      <figure class="shot-hero">
+        <img src="../../assets/shots/nft.jpg" width="960" height="600" alt="NFT marketplace prototype: bid, buy and collect rare digital art, with live auctions and demo trading stats. All figures illustrative.">
+        <p class="cta-row">
+          <a class="btn primary" href="https://lovable.dev/preview/un4p3mBj7gU0PxBceKTH09RP5wwAmbhn" target="_blank" rel="noopener">Open live prototype &#8599;</a>
+          <span class="demo-badge">Concept prototype &mdash; illustrative data</span>
+        </p>
       </figure>
-
-      <p class="page-badge"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
-
-      <dl class="meta">
-        <div><dt>Status</dt><dd>Concept &mdash; never shipped, no users</dd></div>
-        <div><dt>Origin</dt><dd>Spun out of <a href="../defilend/">DeFiLend</a>&rsquo;s growth levers</dd></div>
-        <div><dt>Prototype</dt><dd><a href="https://lovable.dev/preview/un4p3mBj7gU0PxBceKTH09RP5wwAmbhn" target="_blank" rel="noopener">Open live prototype &#8599;</a></dd></div>
-      </dl>
     </header>
 
-    <section class="section" style="padding-top: var(--s5);">
-      <p class="eyebrow">Premise</p>
-      <p>An NFT holder is asset-rich and liquidity-poor &mdash; the crypto version of the borrower whose portfolio doesn&rsquo;t count. Letting them borrow against the asset unlocks capital without a sale. Every part of that sentence is easy except one word: <em>against</em>. Against what value? Marked by whom? Sold to whom, when it goes wrong?</p>
-
-      <p class="eyebrow" style="margin-top: var(--s5);">Why it&rsquo;s hard</p>
-      <p>Three compounding problems. <strong>No reliable price</strong> &mdash; NFTs trade sparsely; the &ldquo;floor price&rdquo; is one thin order away from fiction, and it&rsquo;s manipulable by anyone motivated. <strong>Correlated liquidity</strong> &mdash; the bids that would absorb a liquidation evaporate precisely when liquidations cluster, because the same downturn causes both. <strong>Adverse selection</strong> &mdash; the borrowers keenest to pledge an NFT at a generous valuation are the ones who know it&rsquo;s generous.</p>
-
-      <p class="eyebrow" style="margin-top: var(--s5);">The insight</p>
-      <p>When you can&rsquo;t price the collateral, price the exit. The lending decision isn&rsquo;t &ldquo;what is this worth?&rdquo; &mdash; unanswerable &mdash; but &ldquo;what will it fetch, how fast, in a bad week?&rdquo; That reframing moves the product&rsquo;s centre of gravity from valuation to liquidation: conservative loan-to-value set by realised sales rather than floors, and a liquidation path designed before the first loan, not after the first default. Thin-file underwriting reaches the same conclusion on card rails: with no history to price, you price the downside and cap the exposure.</p>
+    <section class="section" style="padding-top: var(--s4);">
+      <div class="row3">
+        <div>
+          <p class="eyebrow">Premise</p>
+          <p>An NFT holder is asset-rich and liquidity-poor &mdash; crypto&rsquo;s version of the borrower whose portfolio doesn&rsquo;t count. Borrowing against the asset unlocks capital without a sale.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Why it&rsquo;s hard</p>
+          <p>No reliable price &mdash; the &ldquo;floor&rdquo; is one thin order from fiction. Liquidity vanishes exactly when liquidations cluster. And the keenest borrowers know their valuation is generous.</p>
+        </div>
+        <div>
+          <p class="eyebrow">The insight</p>
+          <p>When you can&rsquo;t price the collateral, price the exit: what will it fetch, how fast, in a bad week? Card rails call this thin-file underwriting.</p>
+        </div>
+      </div>
     </section>
 
     <section class="section">
-      <p class="eyebrow">What was built</p>
+      <p class="eyebrow">The underwriting design</p>
       <h2 style="max-width: 26ch;">A lending book that admits what it doesn&rsquo;t know.</h2>
-
-      <figure class="artifact">
-        <div class="chrome">
-          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span>Collection underwriting view</span>
-          <span class="demo-badge">Illustrative data</span>
+      <div class="gapmap" style="margin-top: var(--s3);">
+        <div class="g-row">
+          <span class="g-gap">Oracle</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Trimmed median of realised sales</span>
+          <span class="g-why">raw floor shown, never trusted &middot; resists wash trades and spoofed floors</span>
         </div>
-        <div class="body" style="display:grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); font-family: var(--sans);">
-          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
-            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Collection A (demo)</p>
-            <dl class="kv" style="font-size: var(--fs-0);">
-              <dt>Oracle mark</dt><dd>7-day trimmed median of sales &mdash; demo</dd>
-              <dt>Raw floor</dt><dd>shown, never used for LTV</dd>
-              <dt>Max LTV</dt><dd>35% &mdash; demo, set by realised-sale spread</dd>
-              <dt>Est. time-to-liquidate</dt><dd>6 days in stress &mdash; demo</dd>
-            </dl>
-          </div>
-          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
-            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Book health (demo)</p>
-            <dl class="kv" style="font-size: var(--fs-0);">
-              <dt>Active loans</dt><dd>412 &mdash; demo</dd>
-              <dt>Bad-debt rate</dt><dd>1.1% &mdash; demo</dd>
-              <dt>LTV accuracy</dt><dd>marks within 8% of realised sales &mdash; demo</dd>
-              <dt>Auction depth</dt><dd>committed backstop bids per collection</dd>
-            </dl>
-          </div>
+        <div class="g-row">
+          <span class="g-gap">LTV</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Set per collection by exit math</span>
+          <span class="g-why">sparse, volatile histories produce low ceilings automatically &middot; max 35% (demo)</span>
         </div>
-        <figcaption>Recreated in-page from the prototype. The raw floor is displayed but structurally distrusted.</figcaption>
-      </figure>
+        <div class="g-row">
+          <span class="g-gap">Liquidation</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Designed before the first loan</span>
+          <span class="g-why">committed backstop bids + descending auction with a published clock</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">Bad debt</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">First-class metric on the book screen</span>
+          <span class="g-why">a lender that hides its bad-debt rate is marketing &middot; 1.1% (demo)</span>
+        </div>
+      </div>
 
-      <ol class="callouts">
-        <li><strong>The oracle marks from realised sales, not listings.</strong> A trimmed, time-weighted median of actual sales resists the two cheapest attacks &mdash; wash-traded spikes and spoofed floors &mdash; at the cost of moving slowly, which for a lender is a feature.</li>
-        <li><strong>LTV is set per collection by exit math.</strong> Sparse, volatile sale histories produce low ceilings automatically. No committee decides a collection is &ldquo;blue chip&rdquo;; the spread between marks and realised sales does.</li>
-        <li><strong>The liquidation path exists before the loan.</strong> Committed backstop bids and a descending auction with a published clock &mdash; so &ldquo;time-to-liquidate&rdquo; is a designed number, not a discovery made during a crisis.</li>
-        <li><strong>Bad debt is a first-class metric on the book screen</strong> &mdash; not buried in a risk tab. A lending product that hides its bad-debt rate is marketing.</li>
-      </ol>
-    </section>
-
-    <section class="section">
-      <p class="eyebrow">Success criteria</p>
-      <h2 style="max-width: 26ch;">Volume grows fastest when underwriting is worst.</h2>
-      <p style="max-width: var(--prose);">Loan volume &mdash; the obvious metric &mdash; is actively perverse here: the easiest way to grow it is to over-mark collateral, and adverse selection guarantees the growth arrives. The metrics that matter all live on the exit side.</p>
-      <div class="overflow-x">
-        <table class="metric-table">
-          <thead><tr><th scope="col">Metric</th><th scope="col">What it tells you</th><th scope="col">Note</th></tr></thead>
-          <tbody>
-            <tr class="north"><td>LTV accuracy vs realised sale price</td><td>Whether the oracle tells the truth &mdash; marks tested against what liquidated collateral actually fetched.</td><td>North star; every other number inherits its honesty from this one.</td></tr>
-            <tr><td>Time-to-liquidate</td><td>Whether the designed exit works at the speed the model assumed.</td><td>Measure in calm and stress separately.</td></tr>
-            <tr><td>Bad-debt rate</td><td>The bill for every optimistic assumption upstream.</td><td>Lagging; by the time it moves, the oracle already lied.</td></tr>
-            <tr><td>Loan volume</td><td>Watched, not targeted.</td><td>Growth here without oracle accuracy is a warning, not a win.</td></tr>
-          </tbody>
-        </table>
+      <div class="northstar">
+        <p class="ns-big">North star: LTV accuracy vs realised sale price. ★</p>
+        <p class="ns-why">Loan volume is actively perverse here &mdash; it grows fastest when underwriting is worst, and adverse selection guarantees the growth arrives. Every other number inherits its honesty from the oracle&rsquo;s marks being tested against what liquidated collateral actually fetched.</p>
+        <p class="chips"><i>time-to-liquidate (calm vs stress)</i><i>bad-debt rate</i><i>volume &mdash; watched, not targeted</i></p>
       </div>
     </section>
 
@@ -136,12 +102,12 @@
       <div class="wrong-block">
         <h3>What I got wrong</h3>
         <ul>
-          <li><strong>I started with the gallery.</strong> The first prototype was a beautiful grid of collections with a borrow button &mdash; UI for a product whose actual product is an oracle. The screens above exist because the honest version of this POC is mostly tables.</li>
-          <li><strong>Version one used the raw floor price.</strong> One wash trade or one panicked delisting moved every LTV in the collection. Switching to trimmed realised-sale medians was the single biggest design change &mdash; and it came from red-teaming my own oracle, which should have been step one.</li>
-          <li><strong>I modelled liquidity as a constant.</strong> The bids I assumed would absorb liquidations are correlated with the crash that triggers them. Time-to-liquidate became a designed, committed number &mdash; backstop bids, auction clock &mdash; only after I understood the first model was circular.</li>
+          <li><strong>Started with the gallery</strong> &mdash; a beautiful grid with a borrow button, for a product whose actual product is an oracle.</li>
+          <li><strong>Version one used the raw floor price</strong> &mdash; one wash trade moved every LTV in the collection; red-teaming my own oracle should have been step one.</li>
+          <li><strong>Modelled liquidity as a constant</strong> &mdash; the bids that absorb liquidations are correlated with the crash that triggers them.</li>
         </ul>
       </div>
-      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>What I&rsquo;d do next:</strong> backtest the oracle design against public sale histories for a handful of collections and publish the mark-vs-realised error honestly; then stress the auction design against a simulated cluster of simultaneous liquidations &mdash; the scenario the whole product exists for.</p>
+      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>Next:</strong> backtest the oracle against public sale histories and publish the mark-vs-realised error; stress the auction against a simulated cluster of simultaneous liquidations &mdash; the scenario the product exists for.</p>
       <p style="margin-top: var(--s3);"><a class="btn" href="https://lovable.dev/preview/un4p3mBj7gU0PxBceKTH09RP5wwAmbhn" target="_blank" rel="noopener">Open the live prototype &#8599;</a></p>
     </section>
 

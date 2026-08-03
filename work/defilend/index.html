@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DeFiLend — Aave reimagined for the people it wasn't built for</title>
-<meta name="description" content="Case study: five gaps between DeFi lending's power users and everyone else, and the product features that close them. Concept prototype with illustrative data.">
-<meta property="og:title" content="DeFiLend — Aave reimagined for the people it wasn't built for">
+<title>DeFiLend — Aave, reimagined for newcomers</title>
+<meta name="description" content="Five gaps between DeFi lending's power users and everyone else — closed with product. Concept prototype with illustrative data.">
+<meta property="og:title" content="DeFiLend — Aave, reimagined for newcomers">
 <meta property="og:description" content="Borrowing isn't broken — it's biased. Five gaps, closed with product, not protocol.">
 <meta property="og:type" content="article">
 <meta property="og:image" content="../../assets/og.png">
@@ -33,123 +33,98 @@
 <main id="main">
   <div class="container">
 
-    <header class="case-header">
-      <p class="eyebrow"><span class="num">POC 1</span> &middot; Aave reimagined</p>
+    <header class="case-header" style="padding-bottom: 0;">
+      <p class="eyebrow"><span class="num">POC 1</span> &middot; Aave, reimagined</p>
       <h1>DeFiLend</h1>
-      <p class="lede">DeFi lending works beautifully for the people who already understand it. Five gaps keep everyone else out &mdash; and each one closes with product, not protocol.</p>
+      <p class="lede">Borrowing isn&rsquo;t broken &mdash; it&rsquo;s biased. DeFi fixes the bias, then scares away everyone it was fixing it for.</p>
 
-      <figure class="rails-mini" role="img" aria-label="Miniature rails diagram: card rail answers all three questions; stablecoin rail leaves identity and loss allocation open.">
-        <svg viewBox="0 0 560 84" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="24" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">CARD RAIL</text>
-          <line x1="0" y1="36" x2="560" y2="36" stroke="#3a4048" stroke-width="1.2"/>
-          <circle cx="330" cy="36" r="5" fill="#e2b33c"/>
-          <circle cx="420" cy="36" r="5" fill="#e2b33c"/>
-          <circle cx="510" cy="36" r="5" fill="#e2b33c"/>
-          <text x="0" y="60" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">STABLECOIN RAIL</text>
-          <line x1="0" y1="72" x2="560" y2="72" stroke="#3a4048" stroke-width="1.2" stroke-dasharray="4 5"/>
-          <circle cx="330" cy="72" r="5" fill="none" stroke="#e2b33c" stroke-width="1.5"/>
-          <circle cx="420" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
-          <circle cx="510" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
-        </svg>
+      <figure class="shot-hero">
+        <img src="../../assets/shots/defilend.jpg" width="960" height="600" alt="DeFiLend prototype home: the future of DeFi lending, with demo stats — $2.4B TVL, 15.2% highest APY, 50K+ active users. All figures illustrative.">
+        <p class="cta-row">
+          <a class="btn primary" href="https://lovable.dev/preview/rMxkYMWPAXx0HH3pwYtnzfnhtGYl3l9A" target="_blank" rel="noopener">Open live prototype &#8599;</a>
+          <span class="demo-badge">Concept prototype &mdash; illustrative data</span>
+        </p>
       </figure>
-
-      <p class="page-badge"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
-
-      <dl class="meta">
-        <div><dt>Status</dt><dd>Concept &mdash; never shipped, no users</dd></div>
-        <div><dt>Base</dt><dd>Aave&rsquo;s lending model, re-surfaced for new users</dd></div>
-        <div><dt>Prototype</dt><dd><a href="https://lovable.dev/preview/rMxkYMWPAXx0HH3pwYtnzfnhtGYl3l9A" target="_blank" rel="noopener">Open live prototype &#8599;</a></dd></div>
-      </dl>
     </header>
 
-    <section class="section" style="padding-top: var(--s5);">
-      <p class="eyebrow">Premise</p>
-      <p>In 2021 I was admitted to Dartmouth with a scholarship. The bank&rsquo;s price for the remaining loan: our home as collateral &mdash; worth five times the loan &mdash; at 12% APR. My father&rsquo;s portfolio of blue-chip and bank stocks was worth more than the loan itself; it counted for nothing. To the system, we looked risky. <strong>Borrowing isn&rsquo;t broken &mdash; it&rsquo;s biased</strong>: the biggest barrier to credit isn&rsquo;t money, it&rsquo;s rules about what counts.</p>
-      <p>Aave is the counter-proposal &mdash; deposit collateral, borrow against it, no W-2, no committee. Global, always on, transparent, composable. And almost everyone who could use it bounces off it. The protocol answered the fairness problem and left the adoption problem entirely open.</p>
-
-      <p class="eyebrow" style="margin-top: var(--s5);">Why it&rsquo;s hard</p>
-      <p>The user this matters for has never held a health factor in their head. The stakes are irreversible, the vocabulary is hostile, and one early mistake is a permanent goodbye &mdash; there is no practice mode, no one to call, and no way back. Products for the risk-averse can&rsquo;t just explain risk; they have to let people <em>rehearse</em> it.</p>
-
-      <p class="eyebrow" style="margin-top: var(--s5);">The insight</p>
-      <p>Exploring Aave&rsquo;s retail surface, the gaps clustered into five &mdash; and none of them are protocol problems. <strong>Onboarding &amp; education:</strong> no in-app tutorials or contextual nudges for a first session that decides everything. <strong>Confidence:</strong> no paper trading &mdash; users fear losing funds and have no way to practise. <strong>Protection:</strong> no integration with decentralised insurance. <strong>Automation:</strong> no risk-tiered strategies &mdash; new users don&rsquo;t know what idle assets are for. <strong>Community:</strong> no social layer at all. Every one closes with product.</p>
-    </section>
-
-    <section class="section">
-      <p class="eyebrow">What was built</p>
-      <h2 style="max-width: 26ch;">Five gaps, closed in order of fear.</h2>
-
-      <figure class="artifact">
-        <div class="chrome">
-          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span>DeFiLend &mdash; lending home</span>
-          <span class="demo-badge">Illustrative data</span>
+    <section class="section" style="padding-top: var(--s4);">
+      <div class="row3">
+        <div>
+          <p class="eyebrow">Premise</p>
+          <p>2021: a Dartmouth admit with a scholarship, and the bank still wanted our home &mdash; worth 5&times; the loan &mdash; at 12% APR, while my father&rsquo;s blue-chip portfolio counted for nothing. The barrier to credit isn&rsquo;t money; it&rsquo;s rules about what counts.</p>
         </div>
-        <div class="body" style="display:grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); font-family: var(--sans);">
-          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
-            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Market (demo values)</p>
-            <dl class="kv" style="font-size: var(--fs-0);">
-              <dt>TVL</dt><dd>$2.4B &mdash; demo</dd>
-              <dt>Supplied</dt><dd>$12.5M &mdash; demo</dd>
-              <dt>Best APY</dt><dd>15.2% &mdash; demo</dd>
-              <dt>Users</dt><dd>50K &mdash; demo</dd>
-              <dt>Health factor</dt><dd>2.4 &mdash; demo</dd>
-            </dl>
-          </div>
-          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
-            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Modes</p>
-            <dl class="kv" style="font-size: var(--fs-0);">
-              <dt>Learn Mode</dt><dd>contextual tooltips, on demand</dd>
-              <dt>Simulator</dt><dd>virtual assets, real market shape</dd>
-              <dt>Insurance</dt><dd>opt-in cover on deposits</dd>
-              <dt>AI strategies</dt><dd>risk-tiered, rebalancing</dd>
-              <dt>Community</dt><dd>vaults &middot; contests &middot; leaderboards</dd>
-            </dl>
-          </div>
+        <div>
+          <p class="eyebrow">Why it&rsquo;s hard</p>
+          <p>Aave answers the fairness problem &mdash; collateral in, loan out, no committee. But the user it matters for has never held a health factor in their head, and one irreversible mistake is a permanent goodbye.</p>
         </div>
-        <figcaption>Recreated in-page from the prototype &mdash; every figure is a labelled demo value, per the honesty rules of this site.</figcaption>
-      </figure>
-
-      <ol class="callouts">
-        <li><strong>Market simulator with virtual assets</strong> &mdash; the practice-first belief, literal: rehearse supplying, borrowing and a liquidation with nothing at stake before the first real dollar moves.</li>
-        <li><strong>On-demand Learn Mode</strong> &mdash; contextual tooltips that appear when summoned, not a tutorial gauntlet before the product. Education at the moment of fear, not before it.</li>
-        <li><strong>Insurance layer</strong> &mdash; decentralised cover integrated at deposit time, so protection is a checkbox in the flow, not a separate protocol to research.</li>
-        <li><strong>AI portfolio strategies</strong> &mdash; pick a risk appetite, get a rebalancing strategy; idle assets get a default job. Automation for people who don&rsquo;t yet know what to automate.</li>
-        <li><strong>Pre-vetted community vaults</strong> &mdash; &ldquo;Stable Yield&rdquo;, &ldquo;Web3 Innovation&rdquo;, &ldquo;RWA Income&rdquo; &mdash; curation against decision fatigue, plus contests and leaderboards for the crypto-native crowd.</li>
-        <li><strong>Stock-backed loans</strong> &mdash; borrow against brokerage and wrapped-stock collateral, with RWA and real-estate tokens extending the base. This is the Dartmouth loan, fixed: the portfolio finally counts.</li>
-      </ol>
-    </section>
-
-    <section class="section">
-      <p class="eyebrow">Growth levers</p>
-      <h2 style="max-width: 26ch;">Each lever carries its own meter.</h2>
-      <div class="overflow-x" style="margin-top: var(--s4);">
-        <table class="metric-table">
-          <thead><tr><th scope="col">Lever</th><th scope="col">Why it grows the base</th><th scope="col">Tracked by</th></tr></thead>
-          <tbody>
-            <tr><td>Stock &amp; RWA collateral</td><td>Bridges TradFi holdings into DeFi &mdash; expands who can borrow at all.</td><td>Stock-collateral TVL &middot; new-to-crypto users onboarded</td></tr>
-            <tr><td>NFT lending</td><td>Attracts NFT-native users; diversifies collateral. <a href="../nft-lending/">Spun out as its own POC</a> when the oracle problem got interesting.</td><td>Floor-price collateralisation &middot; loan volume &middot; default rates</td></tr>
-            <tr><td>AI lending assistant</td><td>Natural-language guidance for first-timers &mdash; confidence as a growth channel.</td><td>Activation rate &middot; reduction in user errors &amp; liquidations</td></tr>
-            <tr><td>Card rewards aggregation</td><td>Pulls idle crypto cashback into productive deposits &mdash; passive capital, captured.</td><td>Reward inflows &middot; % converted to deposits</td></tr>
-          </tbody>
-        </table>
+        <div>
+          <p class="eyebrow">The insight</p>
+          <p>Exploring Aave&rsquo;s retail surface, five gaps &mdash; and none are protocol problems. Every one closes with product.</p>
+        </div>
       </div>
     </section>
 
     <section class="section">
-      <p class="eyebrow">Success criteria</p>
-      <h2 style="max-width: 26ch;">TVL is the vanity metric here.</h2>
-      <p style="max-width: var(--prose);">TVL is the number every DeFi deck leads with, and it&rsquo;s the wrong one: it pools mercenary capital that arrives for an incentive and leaves with it, and one whale can move it more than a thousand new users. The point of DeFiLend is the thousand users. The north star follows the practice-first belief all the way through the funnel.</p>
-      <div class="overflow-x">
-        <table class="metric-table">
-          <thead><tr><th scope="col">Metric</th><th scope="col">What it tells you</th><th scope="col">Note</th></tr></thead>
-          <tbody>
-            <tr class="north"><td>Simulator &rarr; first real deposit</td><td>A new-to-crypto user who practised, then committed real funds &mdash; the entire thesis in one conversion.</td><td>North star. Cohort it by starting knowledge, or it flatters.</td></tr>
-            <tr><td>Activation rate</td><td>First-session completion of a meaningful action, real or simulated.</td><td>Where the five gaps show up first.</td></tr>
-            <tr><td>User errors &amp; liquidations avoided</td><td>Whether Learn Mode and AI guidance actually protect people, not just reassure them.</td><td>The safety metric the space doesn&rsquo;t report.</td></tr>
-            <tr><td>Reward inflows converted to deposits</td><td>Whether aggregated cashback becomes working capital.</td><td>Lever health, not headline.</td></tr>
-            <tr><td>Insurance attach rate</td><td>Willingness to pay for protection &mdash; revealed, not surveyed.</td><td>Also prices the fear the product claims to solve.</td></tr>
-          </tbody>
-        </table>
+      <p class="eyebrow">Five gaps &rarr; five features</p>
+      <h2 style="max-width: 26ch;">Closed in order of fear.</h2>
+      <div class="gapmap">
+        <div class="g-row">
+          <span class="g-gap">Confidence</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Market simulator, virtual assets</span>
+          <span class="g-why">rehearse a liquidation with nothing at stake &middot; converts visitors to depositors</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">Onboarding</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">On-demand Learn Mode</span>
+          <span class="g-why">tooltips at the moment of fear &middot; cuts first-session drop-off</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">Protection</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Insurance layer at deposit</span>
+          <span class="g-why">a checkbox in the flow, not a protocol to research &middot; licence to make mistakes</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">Automation</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">AI strategies by risk appetite</span>
+          <span class="g-why">idle assets get a default job &middot; fewer errors and liquidations</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">Community</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Vaults &middot; contests &middot; leaderboards</span>
+          <span class="g-why">&ldquo;Stable Yield&rdquo;, &ldquo;Web3 Innovation&rdquo;, &ldquo;RWA Income&rdquo; &middot; curation beats decision fatigue</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Growth levers &middot; each with its meter</p>
+      <div class="gapmap" style="margin-top: var(--s3);">
+        <div class="g-row">
+          <span class="g-gap">Stock &amp; RWA</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Borrow against wrapped stocks</span>
+          <span class="g-why">the Dartmouth loan, fixed &middot; tracks stock-collateral TVL, new-to-crypto users</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">NFT credit</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">NFT collateral &middot; <a href="../nft-lending/">its own POC</a></span>
+          <span class="g-why">tracks floor-price collateralisation, loan volume, default rates</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">AI assistant</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Natural-language lending guide</span>
+          <span class="g-why">tracks activation, reduction in user errors &amp; liquidations</span>
+        </div>
+        <div class="g-row">
+          <span class="g-gap">Card rewards</span><span class="g-arrow">&rarr;</span>
+          <span class="g-feat">Cashback aggregated into deposits</span>
+          <span class="g-why">tracks reward inflows, % converted to deposits</span>
+        </div>
+      </div>
+
+      <div class="northstar">
+        <p class="ns-big">North star: simulator &rarr; first real deposit. ★</p>
+        <p class="ns-why">TVL is the vanity metric here &mdash; mercenary capital follows incentives out the door, and one whale moves it more than a thousand newcomers. A practised newcomer committing real funds is the whole thesis, proved one user at a time.</p>
+        <p class="chips"><i>activation rate</i><i>liquidations avoided</i><i>insurance attach</i><i>rewards &rarr; deposits</i></p>
       </div>
     </section>
 
@@ -158,13 +133,13 @@
       <div class="wrong-block">
         <h3>What I got wrong</h3>
         <ul>
-          <li><strong>I closed all five gaps at once.</strong> The prototype ships insurance, education, simulation, AI, social and new collateral simultaneously &mdash; a demo flex, not a roadmap. A funded version sequences by activation impact: simulator first, education inside it, everything else earns its slot with data.</li>
-          <li><strong>The automation asks for trust the product hasn&rsquo;t earned yet.</strong> AI strategies assume a user who&rsquo;ll delegate money before they&rsquo;ve practised moving it themselves. That inverts my own belief &mdash; practice builds trust, then automation spends it. Order matters and I had it backwards.</li>
-          <li><strong>Wrapped-stock collateral hand-waves the hard part.</strong> The smart contract is a weekend; the securities-law, custody and broker-integration reality is the actual product. The prototype presents as solved something I&rsquo;d scope as a multi-quarter partnership program.</li>
-          <li><strong>Insurance is priced as a feature, not a cost.</strong> Premiums come out of yield, and I never modelled what protection a fearful user will actually pay for. The attach-rate metric exists because I couldn&rsquo;t answer that question honestly.</li>
+          <li><strong>Closed all five gaps at once</strong> &mdash; a demo flex, not a roadmap; a funded version ships the simulator first and makes everything else earn its slot.</li>
+          <li><strong>Automation before trust</strong> &mdash; AI strategies ask users to delegate money before they&rsquo;ve practised moving it; that inverts my own belief.</li>
+          <li><strong>Wrapped stocks hand-wave the hard part</strong> &mdash; the contract is a weekend; securities law and broker integrations are the actual product.</li>
+          <li><strong>Insurance priced as a feature, not a cost</strong> &mdash; premiums eat yield, and I never modelled willingness to pay.</li>
         </ul>
       </div>
-      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>What I&rsquo;d do next:</strong> strip the POC to the simulator-to-first-deposit funnel and test the north star conversion with real new-to-crypto users; take the stock-collateral thesis to a broker partnership conversation with the legal scoping done first; and publish the avoided-liquidations metric even when it&rsquo;s unflattering &mdash; it&rsquo;s the number that makes this product different.</p>
+      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>Next:</strong> strip to the simulator-to-deposit funnel, test the north-star conversion with real new-to-crypto users, and publish the avoided-liquidations number even when it&rsquo;s unflattering.</p>
       <p style="margin-top: var(--s3);"><a class="btn" href="https://lovable.dev/preview/rMxkYMWPAXx0HH3pwYtnzfnhtGYl3l9A" target="_blank" rel="noopener">Open the live prototype &#8599;</a></p>
     </section>
 

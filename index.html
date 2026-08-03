@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Siddarth Nyati — Stablecoins are a rails change</title>
-<meta name="description" content="Five stablecoin proofs-of-concept from a card-rails product manager: settlement economics, merchant acceptance, DeFi lending, retail experience, NFT credit. Concept prototypes with illustrative data.">
+<meta name="description" content="Product manager across regulated markets — tax, healthcare, payments — with five stablecoin proofs-of-concept. Concept prototypes with illustrative data.">
 <meta property="og:title" content="Siddarth Nyati — Stablecoins are a rails change">
 <meta property="og:description" content="Five stablecoin POCs from a card-rails PM. The three questions every rail must answer: is the credential real, is the person real, who eats the loss.">
 <meta property="og:type" content="website">
@@ -32,236 +32,112 @@
 
 <main id="main">
 
-  <!-- ============================ identity ============================ -->
+  <!-- ============================ intro ============================ -->
   <section class="identity">
     <div class="container">
       <p class="who">
         <b>Siddarth Nyati</b>
         <span>&middot;&nbsp; Product manager, Visa&rsquo;s 3-D Secure platform</span>
-        <span class="demo-badge">Concept prototype &mdash; illustrative data</span>
+        <span class="demo-badge">Concept prototypes &mdash; illustrative data</span>
       </p>
       <div class="cols">
         <h1>Stablecoins are a rails change, not a problem change.</h1>
-        <p class="thesis">Card networks spent thirty years answering three questions &mdash; <em>is the credential real, is the person real, who eats the loss.</em> I work on those answers at Visa. These five concepts ask the same questions of the new rail.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ the tiles ============================ -->
-  <section style="padding-bottom: var(--s4);">
-    <div class="container">
-      <div class="vgrid">
-
-        <!-- T1 · stablecoins × 3DS — interactive -->
-        <a class="vtile" href="work/stablecoin-settle/">
-          <figure class="thumb rails-play" id="rails-play" role="img" aria-label="Interactive diagram: move the cursor along the two rails. The card rail answers all three questions — token vault and cryptogram, EMV 3DS and passkey, liability rules. The stablecoin rail leaves them open — a signature proves the key not the holder, no identity layer, no dispute rail.">
-            <span class="flag hot">Interactive &middot; sweep the cursor</span>
-            <svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <text x="28" y="96" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" letter-spacing="2" fill="#7f8994">CARD RAIL</text>
-              <line x1="28" y1="130" x2="612" y2="130" stroke="#3a4048" stroke-width="1.5"/>
-              <circle class="dotc" cx="360" cy="130" r="7" fill="#e2b33c"/>
-              <circle class="dotc" cx="460" cy="130" r="7" fill="#e2b33c"/>
-              <circle class="dotc" cx="560" cy="130" r="7" fill="#e2b33c"/>
-              <text id="qa-c1" class="qa" x="360" y="108" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" fill="#e2b33c">token vault + cryptogram</text>
-              <text id="qa-c2" class="qa" x="460" y="76" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" fill="#e2b33c">EMV 3DS &middot; passkey</text>
-              <text id="qa-c3" class="qa" x="556" y="108" text-anchor="end" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" fill="#e2b33c">liability rules decide</text>
-
-              <text id="qt-1" class="qa" x="360" y="204" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12.5" font-weight="600" fill="#e7eaee">Q1 &middot; credential?</text>
-              <text id="qt-2" class="qa" x="460" y="204" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12.5" font-weight="600" fill="#e7eaee">Q2 &middot; person?</text>
-              <text id="qt-3" class="qa" x="560" y="204" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12.5" font-weight="600" fill="#e7eaee">Q3 &middot; the loss?</text>
-
-              <text x="28" y="246" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" letter-spacing="2" fill="#7f8994">STABLECOIN RAIL</text>
-              <line x1="28" y1="280" x2="612" y2="280" stroke="#3a4048" stroke-width="1.5" stroke-dasharray="5 6"/>
-              <circle class="dotc" cx="360" cy="280" r="7" fill="none" stroke="#e2b33c" stroke-width="1.6"/>
-              <circle class="dotc" cx="460" cy="280" r="7" fill="none" stroke="#7d8590" stroke-width="1.6"/>
-              <circle class="dotc" cx="560" cy="280" r="7" fill="none" stroke="#7d8590" stroke-width="1.6"/>
-              <text id="qa-s1" class="qa" x="360" y="312" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" fill="#9aa3ae">proves the key, not the holder</text>
-              <text id="qa-s2" class="qa" x="460" y="344" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" fill="#9aa3ae">no identity layer</text>
-              <text id="qa-s3" class="qa" x="556" y="312" text-anchor="end" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" fill="#9aa3ae">no dispute rail</text>
-
-              <text x="28" y="360" font-family="Charter,Georgia,serif" font-size="14" fill="#9aa3ae" font-style="italic">the same $100, two rails &mdash; amber is answered, hollow is open</text>
-            </svg>
-            <span class="torch"></span>
-          </figure>
-          <div class="meta-row"><h2>Stablecoins &times; 3DS</h2><span class="sub">POC 5 &middot; Parity</span></div>
-          <p class="oneline">My settlement analysis &mdash; six interactive calculators on what happens after acceptance.</p>
-        </a>
-
-        <!-- T2 · DeFiLend -->
-        <a class="vtile" href="work/defilend/">
-          <figure class="thumb">
-            <span class="flag">Prototype &middot; demo data</span>
-            <img src="assets/shots/defilend.jpg" width="960" height="600" alt="DeFiLend prototype home: the future of DeFi lending, with demo stats — $2.4B TVL, 15.2% highest APY, 50K+ active users. All figures illustrative.">
-          </figure>
-          <div class="meta-row"><h2>DeFiLend</h2><span class="sub">POC 1 &middot; Aave, reimagined</span></div>
-          <p class="oneline">Borrowing isn&rsquo;t broken &mdash; it&rsquo;s biased. Five gaps closed for the users DeFi scares away.</p>
-        </a>
-
-        <!-- T3 · NFT marketplace -->
-        <a class="vtile" href="work/nft-lending/">
-          <figure class="thumb">
-            <span class="flag">Prototype &middot; demo data</span>
-            <img src="assets/shots/nft.jpg" width="960" height="600" alt="NFT marketplace prototype: bid, buy and collect rare digital art, with live auctions and demo trading stats. All figures illustrative.">
-          </figure>
-          <div class="meta-row"><h2>NFT lending</h2><span class="sub">POC 4 &middot; marketplace &amp; credit</span></div>
-          <p class="oneline">Collateral you can&rsquo;t price &mdash; so underwrite the exit, not the asset.</p>
-        </a>
-
-        <!-- T4 · rewards in stablecoins -->
-        <a class="vtile" href="work/cryptopos/">
-          <figure class="thumb">
-            <span class="flag">Prototype &middot; demo data</span>
-            <img src="assets/shots/rewards.jpg" width="960" height="600" alt="CryptoPos prototype: Merchant Mode for accepting crypto payments and configuring rewards, and a User Wallet for paying and earning. Supports BTC, ETH, USDC and SOL. Demo data.">
-          </figure>
-          <div class="meta-row"><h2>Stablecoin rewards</h2><span class="sub">POC 2 &middot; CryptoPos</span></div>
-          <p class="oneline">Merchants and buyers both get paid to move money on the new rail &mdash; economics the merchant controls.</p>
-        </a>
-
+        <div>
+          <p class="thesis">Three questions decide every payment &mdash; <em>is the credential real, is the person real, who eats the loss.</em> I work on the card-rail answers at Visa; these five concepts ask them of stablecoins.</p>
+          <p class="thesis" style="margin-top: var(--s2); font-style: italic; color: var(--text-faint);">One belief runs through the work: people don&rsquo;t adopt financial products they can&rsquo;t practise first.</p>
+        </div>
       </div>
 
-      <!-- secondary strip -->
-      <div class="substrip">
-        <a class="subcard" href="work/coinbase/">
-          <p class="k">POC 3 &middot; Retail re-read &middot; demo data</p>
-          <h2>Coinbase &mdash; paths, not products</h2>
-          <img src="assets/shots/coinbase.jpg" width="960" height="600" alt="Coinbase-concept prototype: a spot market screen with a crypto payments discovery prompt. Demo data." loading="lazy">
-        </a>
-        <a class="subcard" href="how-i-run-programs/">
-          <p class="k">Method</p>
-          <h2>Discovery &rarr; POC &rarr; scale / no-scale</h2>
-          <p class="peek gate-dots" aria-hidden="true" style="margin:0;">
-            <i></i>G1<i></i>G2<i></i>G3<i></i>G4<i></i>G5<i></i>G6<i></i>G7
-          </p>
-          <p class="k" style="letter-spacing: 0.04em;">Kill criteria at every gate &middot; 104 acceptance criteria</p>
-        </a>
-        <div class="subcard">
-          <p class="k">Manager, Stablecoin Labs &middot; REF077615W</p>
-          <h2>The req, mapped</h2>
-          <p class="chips" style="margin:0;">
-            <a href="work/stablecoin-settle/" style="text-decoration:none;"><i class="hot">mechanics &rarr; Parity</i></a>
-            <a href="work/defilend/" style="text-decoration:none;"><i>DeFi &rarr; Aave notes</i></a>
-            <a href="how-i-run-programs/" style="text-decoration:none;"><i>lifecycle &rarr; method</i></a>
-            <a href="from-card-rails/" style="text-decoration:none;"><i>legacy &times; new &rarr; 3DS</i></a>
-          </p>
+      <div class="arc" aria-label="Career: regulated markets end to end">
+        <div class="step">
+          <p class="dom">Tax</p>
+          <p class="org">Where product first met regulation</p>
+          <p class="win">compliance-grade product work in a rules-first domain</p>
+        </div>
+        <div class="step">
+          <p class="dom">Healthcare</p>
+          <p class="org">Patient resupply platform &middot; ResMed ecosystem</p>
+          <p class="win">reorder rate 40&rarr;70% &middot; AOV +42% &middot; fulfilment &minus;3&ndash;5 days</p>
+        </div>
+        <div class="step">
+          <p class="dom">Payments</p>
+          <p class="org">Visa &middot; 3-D Secure platform</p>
+          <p class="win">passkeys &middot; network tokens &middot; acceptance economics</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ====================== the rails diagram, in full ====================== -->
-  <section class="section">
+  <!-- ============================ five tiles ============================ -->
+  <section style="padding: var(--s3) 0 var(--s7);">
     <div class="container">
-      <p class="eyebrow">The thesis, drawn</p>
-      <figure class="rails" role="img" aria-label="Diagram: the same transaction traversing card rails and stablecoin rails. On card rails, three questions are answered — credential validity at the network token vault, person validity at the issuer via EMV 3DS and passkey, and loss allocation by chargeback and liability rules. On stablecoin rails, a signature proves the key but not the holder, no identity layer exists, and no dispute rail exists — the loss stays where it lands." style="margin-top: var(--s3);">
-        <svg viewBox="0 0 960 404" xmlns="http://www.w3.org/2000/svg">
-          <title>One transaction, two rails, three questions</title>
-          <defs>
-            <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0.6 L7.4,4 L0,7.4" fill="none" stroke="#737d89" stroke-width="1.2"/>
-            </marker>
-          </defs>
-          <text class="lane-label" x="10" y="34">Card rail</text>
-          <text class="lane-label" x="10" y="282">Stablecoin rail</text>
-          <g class="node">
-            <rect x="35"  y="56" width="150" height="56"/>
-            <text x="110" y="79" text-anchor="middle">Cardholder</text>
-            <text x="110" y="97" text-anchor="middle" class="sub">presents credential</text>
-          </g>
-          <g class="node">
-            <rect x="225" y="56" width="150" height="56"/>
-            <text x="300" y="79" text-anchor="middle">Merchant</text>
-            <text x="300" y="97" text-anchor="middle" class="sub">accepts &middot; via acquirer</text>
-          </g>
-          <g class="node">
-            <rect x="415" y="56" width="150" height="56"/>
-            <text x="490" y="79" text-anchor="middle">Network</text>
-            <text x="490" y="97" text-anchor="middle" class="sub">token vault &middot; rulebook</text>
-          </g>
-          <g class="node">
-            <rect x="605" y="56" width="150" height="56"/>
-            <text x="680" y="79" text-anchor="middle">Issuer</text>
-            <text x="680" y="97" text-anchor="middle" class="sub">authenticates &middot; approves</text>
-          </g>
-          <g class="node">
-            <rect x="795" y="56" width="150" height="56"/>
-            <text x="870" y="79" text-anchor="middle">Settlement &amp; disputes</text>
-            <text x="870" y="97" text-anchor="middle" class="sub">T+1 net &middot; chargebacks</text>
-          </g>
-          <line class="flow" x1="187" y1="84" x2="222" y2="84" marker-end="url(#arr)"/>
-          <line class="flow" x1="377" y1="84" x2="412" y2="84" marker-end="url(#arr)"/>
-          <line class="flow" x1="567" y1="84" x2="602" y2="84" marker-end="url(#arr)"/>
-          <line class="flow" x1="757" y1="84" x2="792" y2="84" marker-end="url(#arr)"/>
-          <circle class="q-dot" cx="490" cy="128" r="7"/>
-          <text class="q-label on" x="490" y="149" text-anchor="middle">token vault + cryptogram</text>
-          <circle class="q-dot" cx="680" cy="128" r="7"/>
-          <text class="q-label on" x="680" y="149" text-anchor="middle">EMV 3DS &middot; passkey</text>
-          <circle class="q-dot" cx="870" cy="128" r="7"/>
-          <text class="q-label on" x="930" y="149" text-anchor="end">liability rules decide</text>
-          <line class="flow dashed" x1="395" y1="190" x2="483" y2="137" opacity="0.55"/>
-          <line class="flow dashed" x1="395" y1="212" x2="307" y2="286" opacity="0.55"/>
-          <text class="q-title" x="395" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q1</tspan> &middot; Is the credential real?</text>
-          <line class="flow dashed" x1="585" y1="190" x2="673" y2="137" opacity="0.55"/>
-          <line class="flow dashed" x1="585" y1="212" x2="497" y2="286" opacity="0.55"/>
-          <text class="q-title" x="585" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q2</tspan> &middot; Is this person real?</text>
-          <line class="flow dashed" x1="835" y1="190" x2="863" y2="137" opacity="0.55"/>
-          <line class="flow dashed" x1="835" y1="212" x2="807" y2="286" opacity="0.55"/>
-          <text class="q-title" x="835" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q3</tspan> &middot; Who eats the loss?</text>
-          <circle class="q-dot half" cx="300" cy="294" r="7"/>
-          <text class="q-label" x="300" y="278" text-anchor="middle">proves the key, not the holder</text>
-          <circle class="q-dot hollow" cx="490" cy="294" r="7"/>
-          <text class="q-label" x="512" y="278" text-anchor="middle">open &mdash; merchant&rsquo;s problem</text>
-          <circle class="q-dot hollow" cx="800" cy="294" r="7"/>
-          <text class="q-label" x="800" y="278" text-anchor="middle">open &mdash; loss stays where it lands</text>
-          <g class="node">
-            <rect x="35"  y="308" width="150" height="56"/>
-            <text x="110" y="331" text-anchor="middle">Payer wallet</text>
-            <text x="110" y="349" text-anchor="middle" class="sub">signs with a key</text>
-          </g>
-          <g class="node">
-            <rect x="225" y="308" width="150" height="56"/>
-            <text x="300" y="331" text-anchor="middle">Chain</text>
-            <text x="300" y="349" text-anchor="middle" class="sub">consensus &middot; finality</text>
-          </g>
-          <g class="node">
-            <rect x="415" y="308" width="150" height="56"/>
-            <text x="490" y="331" text-anchor="middle">Merchant wallet</text>
-            <text x="490" y="349" text-anchor="middle" class="sub">balance arrives</text>
-          </g>
-          <g class="node">
-            <rect x="605" y="308" width="150" height="56"/>
-            <text x="680" y="331" text-anchor="middle">Stablecoin issuer</text>
-            <text x="680" y="349" text-anchor="middle" class="sub">burns on redemption</text>
-          </g>
-          <g class="node">
-            <rect x="795" y="308" width="150" height="56"/>
-            <text x="870" y="331" text-anchor="middle">Reserve bank</text>
-            <text x="870" y="349" text-anchor="middle" class="sub">wires fiat</text>
-          </g>
-          <line class="flow" x1="187" y1="336" x2="222" y2="336" marker-end="url(#arr)"/>
-          <line class="flow" x1="377" y1="336" x2="412" y2="336" marker-end="url(#arr)"/>
-          <line class="flow dashed" x1="567" y1="336" x2="602" y2="336" marker-end="url(#arr)"/>
-          <line class="flow dashed" x1="757" y1="336" x2="792" y2="336" marker-end="url(#arr)"/>
-          <text class="q-label" x="680" y="390" text-anchor="middle">&#8598; dashed legs run only on redemption</text>
-        </svg>
-      </figure>
-      <div class="rails-legend" aria-hidden="true">
-        <span class="full"><i></i> answered by the rail</span>
-        <span class="half"><i></i> partially &mdash; cryptography, not identity</span>
-        <span class="open"><i></i> open question</span>
-      </div>
-    </div>
-  </section>
+      <div class="vgrid five">
 
-  <!-- ========================= belief band ========================= -->
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">A point of view</p>
-      <h2 style="max-width: 26ch;">People don&rsquo;t adopt financial products they can&rsquo;t practise first.</h2>
-      <p style="color: var(--text-dim); max-width: var(--prose);">It appears twice above by design &mdash; DeFiLend&rsquo;s market simulator, the Coinbase concept&rsquo;s paper trading. Cards solved practice with reversibility; irreversible rails have to design it in.</p>
-      <p style="display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s4);">
-        <a class="btn primary" href="work/stablecoin-settle/">Open Parity</a>
-        <a class="btn" href="about/">About &amp; contact</a>
-      </p>
+        <a class="vtile" href="work/stablecoin-settle/">
+          <figure class="thumb rails-play" id="rails-play" role="img" aria-label="Interactive diagram: the card rail answers all three payment questions — token vault, 3DS and passkey, liability rules — while the stablecoin rail leaves the person and the loss open.">
+            <span class="flag hot">Interactive</span>
+            <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <text x="20" y="66" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="2" fill="#7f8994">CARD RAIL</text>
+              <line x1="20" y1="100" x2="460" y2="100" stroke="#3a4048" stroke-width="1.5"/>
+              <circle cx="240" cy="100" r="6.5" fill="#e2b33c"/>
+              <circle cx="330" cy="100" r="6.5" fill="#e2b33c"/>
+              <circle cx="420" cy="100" r="6.5" fill="#e2b33c"/>
+              <text id="qa-c1" class="qa" x="240" y="82" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#e2b33c">token vault</text>
+              <text id="qa-c2" class="qa" x="330" y="58" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#e2b33c">3DS &middot; passkey</text>
+              <text id="qa-c3" class="qa" x="455" y="82" text-anchor="end" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#e2b33c">liability rules</text>
+              <text x="20" y="216" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="2" fill="#7f8994">STABLECOIN RAIL</text>
+              <line x1="20" y1="250" x2="460" y2="250" stroke="#3a4048" stroke-width="1.5" stroke-dasharray="5 6"/>
+              <circle cx="240" cy="250" r="6.5" fill="none" stroke="#e2b33c" stroke-width="1.6"/>
+              <circle cx="330" cy="250" r="6.5" fill="none" stroke="#7d8590" stroke-width="1.6"/>
+              <circle cx="420" cy="250" r="6.5" fill="none" stroke="#7d8590" stroke-width="1.6"/>
+              <text id="qa-s1" class="qa" x="240" y="282" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#9aa3ae">key &ne; holder</text>
+              <text id="qa-s2" class="qa" x="330" y="306" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#9aa3ae">no identity layer</text>
+              <text id="qa-s3" class="qa" x="455" y="282" text-anchor="end" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#9aa3ae">no dispute rail</text>
+              <text x="20" y="340" font-family="Charter,Georgia,serif" font-size="12.5" fill="#9aa3ae" font-style="italic">amber = answered &middot; hollow = open</text>
+            </svg>
+            <span class="torch"></span>
+          </figure>
+          <div class="meta-row"><h2>Stablecoins &times; 3DS</h2></div>
+          <p class="oneline">POC 5 &middot; thesis + six calculators</p>
+        </a>
+
+        <a class="vtile" href="work/defilend/">
+          <figure class="thumb">
+            <span class="flag">Demo data</span>
+            <img src="assets/shots/defilend.jpg" width="960" height="600" alt="DeFiLend prototype home — demo stats, all figures illustrative.">
+          </figure>
+          <div class="meta-row"><h2>DeFiLend</h2></div>
+          <p class="oneline">POC 1 &middot; Aave, reimagined for newcomers</p>
+        </a>
+
+        <a class="vtile" href="work/nft-lending/">
+          <figure class="thumb">
+            <span class="flag">Demo data</span>
+            <img src="assets/shots/nft.jpg" width="960" height="600" alt="NFT marketplace prototype — live auctions, demo stats, all figures illustrative.">
+          </figure>
+          <div class="meta-row"><h2>NFT lending</h2></div>
+          <p class="oneline">POC 4 &middot; underwrite the exit</p>
+        </a>
+
+        <a class="vtile" href="work/cryptopos/">
+          <figure class="thumb">
+            <span class="flag">Demo data</span>
+            <img src="assets/shots/rewards.jpg" width="960" height="600" alt="CryptoPos prototype — merchant mode and user wallet with rewards. Demo data.">
+          </figure>
+          <div class="meta-row"><h2>Stablecoin rewards</h2></div>
+          <p class="oneline">POC 2 &middot; get paid to pay in USDC</p>
+        </a>
+
+        <a class="vtile" href="work/coinbase/">
+          <figure class="thumb">
+            <span class="flag">Demo data</span>
+            <img src="assets/shots/coinbase.jpg" width="960" height="600" alt="Coinbase-concept prototype — spot market with payments discovery. Demo data.">
+          </figure>
+          <div class="meta-row"><h2>Coinbase, re-read</h2></div>
+          <p class="oneline">POC 3 &middot; paths, not products</p>
+        </a>
+
+      </div>
     </div>
   </section>
 
@@ -276,18 +152,13 @@
 
 <script src="assets/site.js" defer></script>
 <script>
-/* Tile 1 — cursor-sweep rails. Amber answers light where the cursor travels. */
+/* Tile 1 — cursor-sweep rails. */
 (function () {
   "use strict";
   var play = document.getElementById("rails-play");
   if (!play) return;
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduced) return; // CSS shows all labels statically
-  var zones = [
-    ["qa-c1", "qa-s1", "qt-1"],
-    ["qa-c2", "qa-s2", "qt-2"],
-    ["qa-c3", "qa-s3", "qt-3"]
-  ];
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var zones = [["qa-c1","qa-s1"],["qa-c2","qa-s2"],["qa-c3","qa-s3"]];
   function light(idx) {
     zones.forEach(function (zone, i) {
       zone.forEach(function (id) {
@@ -296,22 +167,18 @@
       });
     });
   }
-  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  if (fine) {
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     play.addEventListener("mousemove", function (e) {
       var r = play.getBoundingClientRect();
       var x = (e.clientX - r.left) / r.width;
       var y = (e.clientY - r.top) / r.height;
       play.style.setProperty("--tx", (x * 100).toFixed(1) + "%");
       play.style.setProperty("--ty", (y * 100).toFixed(1) + "%");
-      var idx = x < 0.45 ? -1 : x < 0.64 ? 0 : x < 0.8 ? 1 : 2;
-      light(idx);
+      light(x < 0.4 ? -1 : x < 0.6 ? 0 : x < 0.78 ? 1 : 2);
     });
     play.addEventListener("mouseleave", function () { light(-1); });
   } else {
-    // touch devices: slow auto-sweep
-    var i = 0;
-    light(0);
+    var i = 0; light(0);
     setInterval(function () { i = (i + 1) % 3; light(i); }, 1800);
   }
 })();

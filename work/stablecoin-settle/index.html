@@ -39,36 +39,125 @@
       <h1>Parity</h1>
       <p class="lede">A merchant can accept a stablecoin in thirty seconds. Deciding what to <em>do</em> with the balance afterwards &mdash; hold it, convert it, sweep it, refund from it &mdash; is the actual product, and nobody builds for that.</p>
 
-      <figure class="rails-mini" role="img" aria-label="Miniature rails diagram: card rail answers all three questions; stablecoin rail leaves identity and loss allocation open.">
-        <svg viewBox="0 0 560 84" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="24" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">CARD RAIL</text>
-          <line x1="0" y1="36" x2="560" y2="36" stroke="#3a4048" stroke-width="1.2"/>
-          <circle cx="330" cy="36" r="5" fill="#e2b33c"/>
-          <circle cx="420" cy="36" r="5" fill="#e2b33c"/>
-          <circle cx="510" cy="36" r="5" fill="#e2b33c"/>
-          <text x="0" y="60" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">STABLECOIN RAIL</text>
-          <line x1="0" y1="72" x2="560" y2="72" stroke="#3a4048" stroke-width="1.2" stroke-dasharray="4 5"/>
-          <circle cx="330" cy="72" r="5" fill="none" stroke="#e2b33c" stroke-width="1.5"/>
-          <circle cx="420" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
-          <circle cx="510" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
-        </svg>
-      </figure>
-
       <p class="page-badge"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
-
-      <dl class="meta">
-        <div><dt>Status</dt><dd>Concept &mdash; never shipped, no users</dd></div>
-        <div><dt>Why this POC</dt><dd>The other four treat USDC as a payment asset. This one treats it as an instrument with a balance sheet behind it.</dd></div>
-        <div><dt>Audience</dt><dd>Commercial &amp; Money Movement</dd></div>
-      </dl>
     </header>
 
-    <!-- ======================= framing ======================= -->
-    <section class="section" style="padding-top: var(--s5);">
-      <p class="eyebrow">Why it&rsquo;s hard</p>
-      <p>Acceptance demos optimise the easy half. The QR code scans, the balance arrives, everyone applauds &mdash; and the merchant is now holding an instrument they can&rsquo;t price, backed by reserves they&rsquo;ve never read, with no refund rail when the customer calls. Card rails answer those questions so quietly that merchants forget the questions exist. A stablecoin roadmap has to answer them out loud.</p>
-      <p class="eyebrow" style="margin-top: var(--s5);">The insight</p>
-      <p>Every cost a merchant pays on card rails buys something specific &mdash; fraud screening, an authentication challenge, a dispute process, guaranteed T+1 funds. Stablecoin acceptance isn&rsquo;t &ldquo;cheaper&rdquo;; it&rsquo;s <em>unbundled</em>. The fair comparison prices each piece a merchant has to buy back. That&rsquo;s what this console does &mdash; six surfaces, one balance.</p>
+    <!-- ======================= the thesis, drawn ======================= -->
+    <section class="section" style="padding-top: var(--s4);">
+      <p class="eyebrow">The thesis</p>
+      <p style="color: var(--text-dim); max-width: var(--prose);">Whoever moves money answers the three questions card networks spent thirty years on. The same $100, both rails:</p>
+      <figure class="rails" role="img" aria-label="Diagram: the same transaction traversing card rails and stablecoin rails. On card rails, three questions are answered — credential validity at the network token vault, person validity at the issuer via EMV 3DS and passkey, and loss allocation by chargeback and liability rules. On stablecoin rails, a signature proves the key but not the holder, no identity layer exists, and no dispute rail exists — the loss stays where it lands." style="margin-top: var(--s3);">
+        <svg viewBox="0 0 960 404" xmlns="http://www.w3.org/2000/svg">
+          <title>One transaction, two rails, three questions</title>
+          <defs>
+            <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0.6 L7.4,4 L0,7.4" fill="none" stroke="#737d89" stroke-width="1.2"/>
+            </marker>
+          </defs>
+          <text class="lane-label" x="10" y="34">Card rail</text>
+          <text class="lane-label" x="10" y="282">Stablecoin rail</text>
+          <g class="node">
+            <rect x="35"  y="56" width="150" height="56"/>
+            <text x="110" y="79" text-anchor="middle">Cardholder</text>
+            <text x="110" y="97" text-anchor="middle" class="sub">presents credential</text>
+          </g>
+          <g class="node">
+            <rect x="225" y="56" width="150" height="56"/>
+            <text x="300" y="79" text-anchor="middle">Merchant</text>
+            <text x="300" y="97" text-anchor="middle" class="sub">accepts &middot; via acquirer</text>
+          </g>
+          <g class="node">
+            <rect x="415" y="56" width="150" height="56"/>
+            <text x="490" y="79" text-anchor="middle">Network</text>
+            <text x="490" y="97" text-anchor="middle" class="sub">token vault &middot; rulebook</text>
+          </g>
+          <g class="node">
+            <rect x="605" y="56" width="150" height="56"/>
+            <text x="680" y="79" text-anchor="middle">Issuer</text>
+            <text x="680" y="97" text-anchor="middle" class="sub">authenticates &middot; approves</text>
+          </g>
+          <g class="node">
+            <rect x="795" y="56" width="150" height="56"/>
+            <text x="870" y="79" text-anchor="middle">Settlement &amp; disputes</text>
+            <text x="870" y="97" text-anchor="middle" class="sub">T+1 net &middot; chargebacks</text>
+          </g>
+          <line class="flow" x1="187" y1="84" x2="222" y2="84" marker-end="url(#arr)"/>
+          <line class="flow" x1="377" y1="84" x2="412" y2="84" marker-end="url(#arr)"/>
+          <line class="flow" x1="567" y1="84" x2="602" y2="84" marker-end="url(#arr)"/>
+          <line class="flow" x1="757" y1="84" x2="792" y2="84" marker-end="url(#arr)"/>
+          <circle class="q-dot" cx="490" cy="128" r="7"/>
+          <text class="q-label on" x="490" y="149" text-anchor="middle">token vault + cryptogram</text>
+          <circle class="q-dot" cx="680" cy="128" r="7"/>
+          <text class="q-label on" x="680" y="149" text-anchor="middle">EMV 3DS &middot; passkey</text>
+          <circle class="q-dot" cx="870" cy="128" r="7"/>
+          <text class="q-label on" x="930" y="149" text-anchor="end">liability rules decide</text>
+          <line class="flow dashed" x1="395" y1="190" x2="483" y2="137" opacity="0.55"/>
+          <line class="flow dashed" x1="395" y1="212" x2="307" y2="286" opacity="0.55"/>
+          <text class="q-title" x="395" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q1</tspan> &middot; Is the credential real?</text>
+          <line class="flow dashed" x1="585" y1="190" x2="673" y2="137" opacity="0.55"/>
+          <line class="flow dashed" x1="585" y1="212" x2="497" y2="286" opacity="0.55"/>
+          <text class="q-title" x="585" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q2</tspan> &middot; Is this person real?</text>
+          <line class="flow dashed" x1="835" y1="190" x2="863" y2="137" opacity="0.55"/>
+          <line class="flow dashed" x1="835" y1="212" x2="807" y2="286" opacity="0.55"/>
+          <text class="q-title" x="835" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q3</tspan> &middot; Who eats the loss?</text>
+          <circle class="q-dot half" cx="300" cy="294" r="7"/>
+          <text class="q-label" x="300" y="278" text-anchor="middle">proves the key, not the holder</text>
+          <circle class="q-dot hollow" cx="490" cy="294" r="7"/>
+          <text class="q-label" x="512" y="278" text-anchor="middle">open &mdash; merchant&rsquo;s problem</text>
+          <circle class="q-dot hollow" cx="800" cy="294" r="7"/>
+          <text class="q-label" x="800" y="278" text-anchor="middle">open &mdash; loss stays where it lands</text>
+          <g class="node">
+            <rect x="35"  y="308" width="150" height="56"/>
+            <text x="110" y="331" text-anchor="middle">Payer wallet</text>
+            <text x="110" y="349" text-anchor="middle" class="sub">signs with a key</text>
+          </g>
+          <g class="node">
+            <rect x="225" y="308" width="150" height="56"/>
+            <text x="300" y="331" text-anchor="middle">Chain</text>
+            <text x="300" y="349" text-anchor="middle" class="sub">consensus &middot; finality</text>
+          </g>
+          <g class="node">
+            <rect x="415" y="308" width="150" height="56"/>
+            <text x="490" y="331" text-anchor="middle">Merchant wallet</text>
+            <text x="490" y="349" text-anchor="middle" class="sub">balance arrives</text>
+          </g>
+          <g class="node">
+            <rect x="605" y="308" width="150" height="56"/>
+            <text x="680" y="331" text-anchor="middle">Stablecoin issuer</text>
+            <text x="680" y="349" text-anchor="middle" class="sub">burns on redemption</text>
+          </g>
+          <g class="node">
+            <rect x="795" y="308" width="150" height="56"/>
+            <text x="870" y="331" text-anchor="middle">Reserve bank</text>
+            <text x="870" y="349" text-anchor="middle" class="sub">wires fiat</text>
+          </g>
+          <line class="flow" x1="187" y1="336" x2="222" y2="336" marker-end="url(#arr)"/>
+          <line class="flow" x1="377" y1="336" x2="412" y2="336" marker-end="url(#arr)"/>
+          <line class="flow dashed" x1="567" y1="336" x2="602" y2="336" marker-end="url(#arr)"/>
+          <line class="flow dashed" x1="757" y1="336" x2="792" y2="336" marker-end="url(#arr)"/>
+          <text class="q-label" x="680" y="390" text-anchor="middle">&#8598; dashed legs run only on redemption</text>
+        </svg>
+      </figure>
+      <div class="rails-legend" aria-hidden="true">
+        <span class="full"><i></i> answered by the rail</span>
+        <span class="half"><i></i> partially &mdash; cryptography, not identity</span>
+        <span class="open"><i></i> open question</span>
+      </div>
+
+      <div class="row3" style="margin-top: var(--s5);">
+        <div>
+          <p class="eyebrow">Why this POC</p>
+          <p>The other four treat USDC as a payment asset. This one treats it as an instrument with a balance sheet behind it &mdash; reserves, custody, mint/burn, settlement.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Why it&rsquo;s hard</p>
+          <p>Acceptance demos optimise the easy half. After the QR scan, the merchant holds an instrument they can&rsquo;t price, backed by reserves they&rsquo;ve never read, with no refund rail.</p>
+        </div>
+        <div>
+          <p class="eyebrow">The insight</p>
+          <p>Every card-rail cost buys something &mdash; fraud screen, authentication, disputes, guaranteed funds. Stablecoins aren&rsquo;t cheaper; they&rsquo;re <em>unbundled</em>. Price the buy-back.</p>
+        </div>
+      </div>
     </section>
 
     <!-- ============== 1 · settlement console (centrepiece) ============== -->
