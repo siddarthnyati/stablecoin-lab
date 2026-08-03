@@ -77,6 +77,14 @@ build/deploy decisions awaiting the owner.
     with illustrative data throughout — nothing shipped, had users, or was
     commissioned") remains on every page and now carries the §7 duty alone.
     The /about "two rules" paragraph was also removed by owner direction.
+16a. **Live embeds reverted (2026-08-03)** — Lovable's inner app sends a
+    frame-ancestors policy that rejects any ancestor chain outside lovable.dev,
+    so in-page embeds show "refused to connect" in real browsers (my preview
+    pane did not enforce ancestor CSP — verified broken on production, reverted
+    same day). Case pages use auto-cycling screenshot slideshows + an
+    "Open the live prototype" button. To get true in-page embeds: hit
+    **Publish** in Lovable for each project and send the permanent URLs;
+    published apps can then be tested for embeddability.
 16. **Visa (Cardinal/DCAP) and Motional achievement details** are owner-supplied
     resume content, published as provided. Confirm public-shareability of the
     Cardinal/DCAP program names and figures (8B+, ~5%, 280bps, 50bps, 30% MoM).
