@@ -24,6 +24,23 @@
   els.forEach(function (el) { io.observe(el); });
 })();
 
+/* "Use it right here" — swap the hero slideshow for a live prototype iframe. */
+(function () {
+  "use strict";
+  document.querySelectorAll("[data-embed]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var hero = b.closest(".shot-hero");
+      if (!hero) return;
+      var url = b.getAttribute("data-embed");
+      hero.classList.remove("slides");
+      hero.style.aspectRatio = "auto";
+      hero.innerHTML = '<iframe src="' + url + '" title="Live prototype — concept, illustrative data" ' +
+        'style="width:100%; height:min(78vh, 760px); border:0; display:block; background:#0e1013;"></iframe>';
+      hero.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+})();
+
 /* Hero slideshows: any .shot-hero.slides cycles its images. */
 (function () {
   "use strict";
