@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parity — what a merchant does after accepting USDC</title>
+<meta name="description" content="Interactive POC: settlement economics, reserves, redemption, custody, refunds and treasury for a merchant holding stablecoin. Concept prototype with illustrative data.">
+<meta property="og:title" content="Parity — the thirty seconds after acceptance are easy. The rest is the product.">
+<meta property="og:description" content="An interactive walk through stablecoin settlement cost, reserve reality, mint/burn, custody, the missing dispute rail, and treasury.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="../../assets/og.png">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="wordmark" href="../../" aria-label="Siddarth Nyati — home">
+      <svg class="tick" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="2.5" x2="18" y2="2.5" stroke="#e7eaee" stroke-width="1.6"/><line x1="0" y1="7.5" x2="18" y2="7.5" stroke="#7d8590" stroke-width="1.6" stroke-dasharray="2 3"/><circle cx="12" cy="2.5" r="2.2" fill="#e2b33c"/></svg>
+      Siddarth Nyati
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="../stablecoin-settle/">Parity</a>
+      <a href="../../from-card-rails/">From card rails</a>
+      <a href="../../how-i-run-programs/">How I run programs</a>
+      <a href="../../about/">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <!-- ======================= case header ======================= -->
+    <header class="case-header">
+      <p class="eyebrow"><span class="num">POC 5</span> &middot; Settlement economics &middot; Interactive</p>
+      <h1>Parity</h1>
+      <p class="lede">A merchant can accept a stablecoin in thirty seconds. Deciding what to <em>do</em> with the balance afterwards &mdash; hold it, convert it, sweep it, refund from it &mdash; is the actual product, and nobody builds for that.</p>
+
+      <figure class="rails-mini" role="img" aria-label="Miniature rails diagram: card rail answers all three questions; stablecoin rail leaves identity and loss allocation open.">
+        <svg viewBox="0 0 560 84" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="24" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">CARD RAIL</text>
+          <line x1="0" y1="36" x2="560" y2="36" stroke="#3a4048" stroke-width="1.2"/>
+          <circle cx="330" cy="36" r="5" fill="#e2b33c"/>
+          <circle cx="420" cy="36" r="5" fill="#e2b33c"/>
+          <circle cx="510" cy="36" r="5" fill="#e2b33c"/>
+          <text x="0" y="60" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">STABLECOIN RAIL</text>
+          <line x1="0" y1="72" x2="560" y2="72" stroke="#3a4048" stroke-width="1.2" stroke-dasharray="4 5"/>
+          <circle cx="330" cy="72" r="5" fill="none" stroke="#e2b33c" stroke-width="1.5"/>
+          <circle cx="420" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+          <circle cx="510" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+        </svg>
+      </figure>
+
+      <p class="page-badge"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
+
+      <dl class="meta">
+        <div><dt>Status</dt><dd>Concept &mdash; never shipped, no users</dd></div>
+        <div><dt>Why this POC</dt><dd>The other four treat USDC as a payment asset. This one treats it as an instrument with a balance sheet behind it.</dd></div>
+        <div><dt>Audience</dt><dd>Commercial &amp; Money Movement</dd></div>
+      </dl>
+    </header>
+
+    <!-- ======================= framing ======================= -->
+    <section class="section" style="padding-top: var(--s5);">
+      <p class="eyebrow">Why it&rsquo;s hard</p>
+      <p>Acceptance demos optimise the easy half. The QR code scans, the balance arrives, everyone applauds &mdash; and the merchant is now holding an instrument they can&rsquo;t price, backed by reserves they&rsquo;ve never read, with no refund rail when the customer calls. Card rails answer those questions so quietly that merchants forget the questions exist. A stablecoin roadmap has to answer them out loud.</p>
+      <p class="eyebrow" style="margin-top: var(--s5);">The insight</p>
+      <p>Every cost a merchant pays on card rails buys something specific &mdash; fraud screening, an authentication challenge, a dispute process, guaranteed T+1 funds. Stablecoin acceptance isn&rsquo;t &ldquo;cheaper&rdquo;; it&rsquo;s <em>unbundled</em>. The fair comparison prices each piece a merchant has to buy back. That&rsquo;s what this console does &mdash; six surfaces, one balance.</p>
+    </section>
+
+    <!-- ============== 1 · settlement console (centrepiece) ============== -->
+    <section class="section" id="settlement">
+      <p class="eyebrow"><span class="num">1&thinsp;/&thinsp;6</span> &middot; Settlement console</p>
+      <h2 style="max-width: 26ch;">$100 arrives as USDC. Now choose.</h2>
+      <p style="color: var(--text-dim);">Set a ticket and a monthly volume, pick a settlement policy, and compare the all-in cost of each path against card interchange as the benchmark.</p>
+
+      <div class="console" aria-label="Settlement cost comparison — interactive">
+        <div class="console-head">
+          <strong>Cost of acceptance, all-in</strong>
+          <span class="demo-badge">Illustrative rates</span>
+        </div>
+        <div class="console-body">
+          <div style="display:grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+            <div class="field">
+              <label for="ticket">Average ticket</label>
+              <input type="range" id="ticket" min="5" max="500" step="5" value="40">
+              <span class="value" id="ticket-out">$40</span>
+            </div>
+            <div class="field">
+              <label for="volume">Monthly volume</label>
+              <input type="range" id="volume" min="10000" max="1000000" step="10000" value="80000">
+              <span class="value" id="volume-out">$80,000</span>
+            </div>
+            <div class="field">
+              <label id="policy-label">Stablecoin policy</label>
+              <div class="seg" role="group" aria-labelledby="policy-label">
+                <button type="button" data-policy="convert" aria-pressed="true">Convert</button>
+                <button type="button" data-policy="hold" aria-pressed="false">Hold</button>
+                <button type="button" data-policy="split" aria-pressed="false">Split 50/50</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cost-bars" id="cost-bars" style="margin-top: var(--s4);" aria-live="polite">
+            <!-- rows injected -->
+          </div>
+
+          <div style="display:grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: var(--s4);">
+            <div class="stat"><span class="n" id="delta-n">&ndash;</span><span class="l">Monthly delta vs card rails</span><span class="d">before pricing what interchange buys</span></div>
+            <div class="stat"><span class="n" id="delta-bps">&ndash;</span><span class="l">Effective rate gap</span><span class="d">all-in cost, percentage points</span></div>
+            <div class="stat"><span class="n" id="unbundled-n">&ndash;</span><span class="l">Services left unbundled</span><span class="d">fraud screen &middot; auth challenge &middot; dispute rail &middot; funds guarantee</span></div>
+          </div>
+
+          <p class="note" style="margin-top: var(--s3);">Model, not market: card benchmark 2.6% + 10&cent; blended; on-chain fee 2&cent; flat (L2); off-ramp 0.50% + 0.10% spread; holding is &ldquo;free&rdquo; here and priced honestly in <a href="#treasury">surface 6</a>. Every number is a demo value.</p>
+        </div>
+      </div>
+      <p style="max-width: var(--prose); color: var(--text-dim);">The gap is real but smaller than the pitch decks say &mdash; and the four unbundled services are why. A merchant who re-buys fraud screening, authentication, and dispute handling à la carte gives most of the spread back. The product opportunity is selling those pieces <em>on the new rail</em>, priced in basis points, the way interchange always has.</p>
+    </section>
+
+    <!-- ================== 2 · reserve & attestation ================== -->
+    <section class="section" id="reserves">
+      <p class="eyebrow"><span class="num">2&thinsp;/&thinsp;6</span> &middot; Reserve &amp; attestation</p>
+      <h2 style="max-width: 26ch;">What the balance actually is.</h2>
+      <p style="color: var(--text-dim);">A merchant holding $50,000 of a stablecoin is an unsecured creditor of its issuer. Most don&rsquo;t know that. This surface reads the fine print for them.</p>
+
+      <div class="console">
+        <div class="console-head">
+          <strong>Issuer profile &mdash; fictional composite</strong>
+          <span class="demo-badge">Illustrative data</span>
+        </div>
+        <div class="console-body">
+          <div style="display:grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+            <div>
+              <dl class="kv">
+                <dt>Instrument</dt><dd>USD stablecoin, 1:1 redemption claim</dd>
+                <dt>Reserve custodian</dt><dd>Regulated bank + money-market funds</dd>
+                <dt>Last attestation</dt><dd>Monthly, point-in-time (demo date)</dd>
+                <dt>Redemption terms</dt><dd>Business days; issuer may gate size/velocity</dd>
+              </dl>
+              <div style="margin-top: var(--s3);" aria-hidden="true">
+                <div style="display:flex; height: 14px; border-radius: 2px; overflow:hidden; border: 1px solid var(--border-strong);">
+                  <i style="width:80%; background: var(--text-faint);" title="Short-dated T-bills 80%"></i>
+                  <i style="width:12%; background: #4d5560;" title="Overnight reverse repo 12%"></i>
+                  <i style="width:8%;  background: var(--accent);" title="Cash at banks 8%"></i>
+                </div>
+                <p class="note" style="margin-top: var(--s1);">Reserve mix (demo): 80% short-dated T-bills &middot; 12% overnight reverse repo &middot; <span style="color: var(--accent);">8% cash at banks</span> &mdash; the slice that failed in March 2023-style bank stress.</p>
+              </div>
+            </div>
+            <div>
+              <details>
+                <summary style="cursor:pointer; font-family: var(--sans); font-weight:600;">What &ldquo;fully reserved&rdquo; guarantees</summary>
+                <p class="note" style="margin-top: var(--s1);">That at the attestation instant, reported reserves &ge; tokens outstanding. It is an accountant&rsquo;s photograph, not a film.</p>
+              </details>
+              <details style="margin-top: var(--s2);">
+                <summary style="cursor:pointer; font-family: var(--sans); font-weight:600;">What it doesn&rsquo;t guarantee</summary>
+                <ul class="note" style="margin-top: var(--s1); padding-left: 18px;">
+                  <li>An attestation is not an audit &mdash; no opinion on controls.</li>
+                  <li>Nothing between attestation dates.</li>
+                  <li>Redemption at par, at speed, in stress &mdash; gates and queues are legal.</li>
+                  <li>The banked-cash slice carries ordinary bank-failure risk.</li>
+                </ul>
+              </details>
+              <details style="margin-top: var(--s2);">
+                <summary style="cursor:pointer; font-family: var(--sans); font-weight:600;">Why a merchant should care</summary>
+                <p class="note" style="margin-top: var(--s1);">Holding the coin is a treasury decision with credit exposure &mdash; which is why the settlement console&rsquo;s &ldquo;hold&rdquo; path is never actually free. Card rails never ask a merchant to underwrite their acquirer.</p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3 · redemption path ==================== -->
+    <section class="section" id="redemption">
+      <p class="eyebrow"><span class="num">3&thinsp;/&thinsp;6</span> &middot; Redemption path</p>
+      <h2 style="max-width: 26ch;">Mint and burn, mechanically.</h2>
+      <p style="color: var(--text-dim);">&ldquo;Convert to fiat&rdquo; is one button and five parties. Step through what actually happens &mdash; and where the time goes.</p>
+
+      <div class="console">
+        <div class="console-head">
+          <strong>Burn walk-through</strong>
+          <span class="demo-badge">Illustrative timing</span>
+        </div>
+        <div class="console-body">
+          <div style="display:flex; gap: var(--s2); align-items:center; flex-wrap: wrap; margin-bottom: var(--s3);">
+            <button class="btn" type="button" id="redeem-play">Play redemption</button>
+            <span class="note">Supply outstanding: <span class="value" id="supply" style="font-size: var(--fs-2);">1,000,000</span> <span style="font-family:var(--sans);">USDC (demo)</span></span>
+          </div>
+          <ol class="steps" id="redeem-steps">
+            <li><span class="who">Merchant</span> <span class="what">&mdash; sends 50,000 USDC to the issuer&rsquo;s redemption address. On-chain leg: seconds to minutes to finality.</span></li>
+            <li><span class="who">Chain</span> <span class="what">&mdash; transfer finalises; the tokens now sit with the issuer, not the merchant.</span></li>
+            <li><span class="who">Issuer</span> <span class="what">&mdash; burns the 50,000 tokens. Supply outstanding drops; the 1:1 claim is extinguished.</span></li>
+            <li><span class="who">Issuer &rarr; reserve bank</span> <span class="what">&mdash; instructs release of $50,000 from reserves.</span></li>
+            <li><span class="who">Banking rail</span> <span class="what">&mdash; wire or ACH carries fiat to the merchant&rsquo;s account. This is where the clock lives: cut-off times, business days, compliance checks.</span></li>
+            <li><span class="who">Merchant bank</span> <span class="what">&mdash; funds land. End-to-end: same-day to T+1 in the demo &mdash; roughly card settlement speed, because the last leg is the same legacy rail.</span></li>
+          </ol>
+          <p class="note" style="margin-top: var(--s3);">The uncomfortable symmetry: the chain leg is nearly instant, but redemption ends on the banking rails stablecoins were meant to route around. Against card T+1 net settlement, the advantage is control and finality &mdash; not raw speed &mdash; until the fiat leg modernises too.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4 · custody choice ===================== -->
+    <section class="section" id="custody">
+      <p class="eyebrow"><span class="num">4&thinsp;/&thinsp;6</span> &middot; Custody choice</p>
+      <h2 style="max-width: 26ch;">Whose keys, whose problem.</h2>
+      <p style="color: var(--text-dim);">Not a feature list &mdash; a decision. Pick one and read what you just agreed to.</p>
+
+      <div class="console">
+        <div class="console-head">
+          <strong>Choose a custody model</strong>
+          <span class="demo-badge">Concept — illustrative</span>
+        </div>
+        <div class="console-body">
+          <div class="choice-grid">
+            <button class="choice" type="button" data-custody="self" aria-pressed="true">
+              <h4>Self-custody</h4>
+              <p>Merchant holds its own keys &mdash; hardware or multisig. Nobody between the merchant and its money.</p>
+            </button>
+            <button class="choice" type="button" data-custody="qualified" aria-pressed="false">
+              <h4>Qualified custodian</h4>
+              <p>A regulated third party holds the keys under a custody agreement. Someone to call, and to blame.</p>
+            </button>
+          </div>
+          <dl class="kv" id="custody-kv" style="margin-top: var(--s4);" aria-live="polite"></dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== 5 · refund & dispute (most room) ================== -->
+    <section class="section" id="disputes">
+      <p class="eyebrow"><span class="num">5&thinsp;/&thinsp;6</span> &middot; Refund &amp; dispute &mdash; the missing rail</p>
+      <h2 style="max-width: 28ch;">Chargebacks are the feature crypto forgot to copy.</h2>
+      <p>On card rails, a cardholder who gets a brick instead of a laptop has a process: the issuer files, a rulebook allocates liability, and if the transaction was 3DS-authenticated the fraud loss has <em>already</em> shifted from merchant to issuer by design. That machinery is why strangers hand card numbers to strangers. On a stablecoin rail a &ldquo;refund&rdquo; is just a brand-new payment the merchant may or may not choose to send. There is no rail &mdash; so this surface proposes three, and is explicit about who eats the loss in each.</p>
+
+      <div class="console">
+        <div class="console-head">
+          <strong>Dispute mechanism explorer</strong>
+          <span class="demo-badge">Proposed — illustrative</span>
+        </div>
+        <div class="console-body">
+          <div class="seg" role="group" aria-label="Dispute mechanism" style="margin-bottom: var(--s3); flex-wrap: wrap;">
+            <button type="button" data-mech="escrow" aria-pressed="true">Escrow window</button>
+            <button type="button" data-mech="reserve" aria-pressed="false">Refund reserve</button>
+            <button type="button" data-mech="attest" aria-pressed="false">Delivery attestation</button>
+          </div>
+
+          <div id="mech-panel" aria-live="polite"></div>
+
+          <hr style="margin: var(--s4) 0;">
+
+          <div style="display:grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: end;">
+            <div class="field" style="margin:0;">
+              <label for="dispute-rate">Assumed dispute rate</label>
+              <input type="range" id="dispute-rate" min="0.1" max="3" step="0.1" value="0.6">
+              <span class="value" id="dispute-rate-out">0.6%</span>
+            </div>
+            <div class="stat"><span class="n" id="mech-cost">&ndash;</span><span class="l" id="mech-cost-label">Mechanism cost</span><span class="d" id="mech-cost-note"></span></div>
+            <div class="stat"><span class="n" id="mech-bps">&ndash;</span><span class="l">As basis points on volume</span><span class="d">compare: dispute handling is part of what interchange funds today</span></div>
+          </div>
+          <p class="note" style="margin-top: var(--s3);">Uses the settlement console&rsquo;s monthly volume. Demo arithmetic &mdash; the point is that consumer protection has a price, and on card rails that price is already inside the interchange line a merchant pays without itemising it.</p>
+        </div>
+      </div>
+
+      <p style="max-width: var(--prose);">The design pattern worth porting isn&rsquo;t the chargeback form &mdash; it&rsquo;s <strong>liability shift as an incentive</strong>. EMV 3DS moved fraud loss to whoever performed authentication, and authentication rates followed. A stablecoin dispute rail should do the same: whoever attests &mdash; to delivery, to identity, to escrow release &mdash; carries the loss when the attestation is wrong. Loss allocation is the product; everything else is plumbing.</p>
+    </section>
+
+    <!-- ====================== 6 · treasury view ====================== -->
+    <section class="section" id="treasury">
+      <p class="eyebrow"><span class="num">6&thinsp;/&thinsp;6</span> &middot; Treasury view</p>
+      <h2 style="max-width: 26ch;">&ldquo;Hold&rdquo; is a position, not a default.</h2>
+      <p style="color: var(--text-dim);">The settlement console let you hold for free. This surface presents the bill &mdash; and the auto-sweep rule that caps it.</p>
+
+      <div class="console">
+        <div class="console-head">
+          <strong>Exposure &amp; sweep rules</strong>
+          <span class="demo-badge">Illustrative data</span>
+        </div>
+        <div class="console-body">
+          <div style="display:grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+            <div class="field">
+              <label for="hold-share">Share of volume held as USDC</label>
+              <input type="range" id="hold-share" min="0" max="100" step="5" value="30">
+              <span class="value" id="hold-share-out">30%</span>
+            </div>
+            <div class="field">
+              <label for="sweep-threshold">Auto-sweep when balance exceeds</label>
+              <input type="range" id="sweep-threshold" min="5000" max="200000" step="5000" value="25000">
+              <span class="value" id="sweep-out">$25,000</span>
+            </div>
+          </div>
+          <div style="display:grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: var(--s3);" aria-live="polite">
+            <div class="stat"><span class="n" id="avg-exposure">&ndash;</span><span class="l">Average balance at risk</span><span class="d">issuer credit + depeg exposure, demo</span></div>
+            <div class="stat"><span class="n" id="depeg-cost">&ndash;</span><span class="l">Cost of a 50bp depeg day</span><span class="d">on the held balance &mdash; illustrative stress</span></div>
+            <div class="stat"><span class="n" id="sweeps-mo">&ndash;</span><span class="l">Sweeps per month</span><span class="d">each sweep pays the off-ramp toll from surface 1</span></div>
+          </div>
+          <p class="note" style="margin-top: var(--s3);">A &ldquo;stable&rdquo; balance still moved in real markets &mdash; depegs have happened to major coins. The rule is boring and correct: hold what you&rsquo;d be comfortable holding of any single counterparty&rsquo;s paper, sweep the rest, and write the threshold down before the volatile day, not during it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== success criteria ==================== -->
+    <section class="section">
+      <p class="eyebrow">Success criteria</p>
+      <h2 style="max-width: 26ch;">The obvious metric is wrong.</h2>
+      <p style="max-width: var(--prose);">The obvious metric is signup count or gross volume &mdash; both inflate with incentives and prove nothing. A merchant who accepts a stablecoin once has run an experiment. One who accepts twice, unprompted, has adopted a rail.</p>
+      <div class="overflow-x">
+        <table class="metric-table">
+          <thead><tr><th scope="col">Metric</th><th scope="col">What it tells you</th><th scope="col">Target-setting note (illustrative)</th></tr></thead>
+          <tbody>
+            <tr class="north"><td>Repeat acceptance</td><td>North star &mdash; a second unprompted settlement means the economics and operations both cleared the bar.</td><td>Set after a baseline cohort; a demo target would be theatre.</td></tr>
+            <tr><td>Merchant activation rate</td><td>Onboarded &rarr; first settlement. Measures friction, not conviction.</td><td>Diagnostic; never the headline.</td></tr>
+            <tr><td>Stablecoin settlement share</td><td>% of volume settling to stablecoin vs auto-converted to fiat &mdash; reveals actual trust in the instrument.</td><td>Watch the trend, not the level.</td></tr>
+            <tr><td>All-in cost delta vs interchange</td><td>The economics, honestly bundled &mdash; including bought-back services.</td><td>Compute per segment; small tickets behave differently.</td></tr>
+            <tr><td>Refund resolution time</td><td>Whether the proposed dispute rail actually works under load.</td><td>Card rails set the bar to beat.</td></tr>
+            <tr><td>Disputed volume %</td><td>Leading indicator of whether the rail is attracting the wrong flow.</td><td>Rises before losses do.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== what I got wrong ==================== -->
+    <section class="section">
+      <p class="eyebrow">What I got wrong &middot; what&rsquo;s next</p>
+      <div class="wrong-block">
+        <h3>What I got wrong</h3>
+        <ul>
+          <li><strong>I benchmarked against headline interchange.</strong> The first cost model compared USDC paths to the card rate and declared victory. Wrong benchmark: interchange <em>buys</em> fraud screening, authentication, dispute handling and a funds guarantee. The honest comparison prices the unbundled services back in &mdash; the current console does, and the gap shrank accordingly.</li>
+          <li><strong>I treated &ldquo;hold&rdquo; as the cheap path.</strong> Zero conversion cost read as zero cost. Holding is a credit position against the issuer plus depeg exposure &mdash; surface 6 exists because surface 1 was quietly lying.</li>
+          <li><strong>I assumed the speed story was the chain&rsquo;s to win.</strong> Redemption ends on a wire or ACH leg, so end-to-end time to fiat lands near card settlement. The durable advantages are finality and programmability, not speed &mdash; a weaker pitch and a truer one.</li>
+        </ul>
+      </div>
+      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>What I&rsquo;d do next:</strong> pressure-test the dispute mechanisms with real merchants and a real issuer&rsquo;s redemption terms; model small-ticket economics separately (the 2&cent; flat fee flips the comparison at low tickets); and take the &ldquo;services unbundled&rdquo; framing to an issuer or processor as a product thesis &mdash; sell protection on the new rail, priced in basis points, the way the old rail always has.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container inner">
+    <p>Concept prototype &mdash; illustrative data throughout; nothing shipped, had users, or was commissioned.</p>
+    <p><a href="../cryptopos/">Next: CryptoPos &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
+<script>
+/* Parity — all interactive logic. Every number is an ILLUSTRATIVE demo value. */
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt$ = function (n) {
+    var abs = Math.abs(n);
+    var s = abs >= 1000 ? "$" + Math.round(abs).toLocaleString("en-US") : "$" + abs.toFixed(2);
+    return (n < 0 ? "−" : "") + s;
+  };
+
+  /* ---- demo rate card (illustrative, mirrors on-page note) ---- */
+  var CARD_PCT = 0.026, CARD_FIX = 0.10;       // blended card cost
+  var CHAIN_FIX = 0.02;                          // L2 network fee per txn
+  var OFFRAMP_PCT = 0.005, SPREAD_PCT = 0.001;   // conversion toll
+
+  /* ---- 1 · settlement console ---- */
+  var policy = "convert";
+  function costs(ticket, volume) {
+    var txns = volume / ticket;
+    var card = volume * CARD_PCT + txns * CARD_FIX;
+    var chain = txns * CHAIN_FIX;
+    var convert = chain + volume * (OFFRAMP_PCT + SPREAD_PCT);
+    var hold = chain; // conversion cost deferred — exposure priced in surface 6
+    var split = chain + (volume / 2) * (OFFRAMP_PCT + SPREAD_PCT);
+    return { card: card, convert: convert, hold: hold, split: split, txns: txns };
+  }
+  function renderCosts() {
+    var ticket = +$("ticket").value, volume = +$("volume").value;
+    $("ticket-out").textContent = "$" + ticket;
+    $("volume-out").textContent = "$" + volume.toLocaleString("en-US");
+    var c = costs(ticket, volume);
+    var rows = [
+      { key: "card",    name: "Card rails",  note: "benchmark", val: c.card,  cls: "benchmark" },
+      { key: "convert", name: "USDC · convert", note: "off-ramp now", val: c.convert, cls: "" },
+      { key: "hold",    name: "USDC · hold",    note: "exposure unpriced", val: c.hold, cls: "" },
+      { key: "split",   name: "USDC · split",   note: "50/50", val: c.split, cls: "" }
+    ];
+    var chosen = rows.filter(function (r) { return r.key === policy; })[0];
+    var max = Math.max.apply(null, rows.map(function (r) { return r.val; }));
+    $("cost-bars").innerHTML = rows.map(function (r) {
+      var best = r.key === policy ? " best" : "";
+      var pct = Math.max(2, (r.val / max) * 100);
+      var rate = (r.val / volume * 100).toFixed(2) + "%";
+      return '<div class="cost-row ' + r.cls + best + '">' +
+        '<span class="name">' + r.name + (r.key === policy ? " ★" : "") + '</span>' +
+        '<span class="track"><span class="fill" style="width:' + pct + '%"></span></span>' +
+        '<span class="amt">' + fmt$(r.val) + "<small>" + rate + " · " + r.note + "</small></span>" +
+        "</div>";
+    }).join("");
+    var delta = chosen.val - c.card;
+    $("delta-n").textContent = (delta <= 0 ? "−" : "+") + fmt$(Math.abs(delta)).replace("−", "");
+    $("delta-bps").textContent = ((chosen.val - c.card) / volume * 100).toFixed(2).replace("-", "−") + " pts";
+    $("unbundled-n").textContent = "4";
+    renderDisputeCost();
+  }
+  ["ticket", "volume"].forEach(function (id) { $(id).addEventListener("input", renderCosts); });
+  document.querySelectorAll("[data-policy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      policy = b.getAttribute("data-policy");
+      document.querySelectorAll("[data-policy]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      renderCosts();
+    });
+  });
+
+  /* ---- 3 · redemption walk-through ---- */
+  var steps = document.querySelectorAll("#redeem-steps li");
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var playing = false;
+  $("redeem-play").addEventListener("click", function () {
+    if (playing) return;
+    playing = true;
+    steps.forEach(function (li) { li.classList.remove("active"); });
+    $("supply").textContent = "1,000,000";
+    var i = 0;
+    function advance() {
+      if (i > 0) steps[i - 1].classList.remove("active");
+      if (i >= steps.length) {
+        playing = false;
+        steps.forEach(function (li) { li.classList.add("active"); });
+        return;
+      }
+      steps[i].classList.add("active");
+      if (i === 2) $("supply").textContent = "950,000"; // burn
+      i++;
+      setTimeout(advance, reduced ? 0 : 900);
+    }
+    advance();
+  });
+
+  /* ---- 4 · custody ---- */
+  var CUSTODY = {
+    self: [
+      ["Control", "Total. Transactions need nobody’s permission — and nobody’s help."],
+      ["Insurance", "Largely uninsurable at commercial terms; loss of keys is loss of funds."],
+      ["Operational burden", "Key ceremony, signer quorum, succession planning — the merchant becomes a tiny custodian bank."],
+      ["Regulatory posture", "Simpler perimeter, but auditors and lenders treat self-held keys as concentration risk."],
+      ["Failure mode", "One compromised laptop or one departed employee with signing power."]
+    ],
+    qualified: [
+      ["Control", "Contractual, not cryptographic. Withdrawal policies, allow-lists, and someone to call at 2am."],
+      ["Insurance", "Custodian carries crime/specie coverage — read the exclusions; they are load-bearing."],
+      ["Operational burden", "Low day-to-day; high onboarding — diligence, agreements, fee schedule in basis points."],
+      ["Regulatory posture", "Cleaner for audit and lending; custody at a qualified custodian is language CFOs and examiners already accept."],
+      ["Failure mode", "Custodian outage, gating, or insolvency — counterparty risk again, in a nicer suit."]
+    ]
+  };
+  function renderCustody(kind) {
+    $("custody-kv").innerHTML = CUSTODY[kind].map(function (row) {
+      return "<dt>" + row[0] + "</dt><dd>" + row[1] + "</dd>";
+    }).join("");
+  }
+  document.querySelectorAll("[data-custody]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("[data-custody]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      renderCustody(b.getAttribute("data-custody"));
+    });
+  });
+  renderCustody("self");
+
+  /* ---- 5 · dispute mechanisms ---- */
+  var MECH = {
+    escrow: {
+      title: "Time-locked escrow window",
+      body: "Settlement parks in an escrow contract for a fixed window (say 7 days, demo). The buyer can raise a dispute inside the window and freeze release; silence releases funds to the merchant automatically.",
+      loss: "During the window the merchant bears the loss — funds return to the buyer on a sustained dispute. After release, the buyer bears everything: the card-rails asymmetry, inverted by time.",
+      tradeoff: "Consumer protection without an underwriter — paid for in merchant cash-flow delay, which is a real cost (float).",
+      cost: function (volume, rate) { return volume * (7 / 30) * (0.05 / 12); }, // ~7 days of volume floating at 5% APR demo
+      label: "Float cost of 7-day escrow / mo",
+      note: "merchant working-capital cost, demo APR"
+    },
+    reserve: {
+      title: "Merchant-funded refund reserve",
+      body: "The merchant posts a rolling reserve — a percentage of volume held against future refunds, exactly as acquirers hold rolling reserves for risky merchants today. Refunds pay out of the reserve instantly.",
+      loss: "Merchant first, by construction. If disputes exhaust the reserve, the excess loss lands on buyers — so reserve sizing (dispute rate × buffer) is the whole design.",
+      tradeoff: "Familiar to anyone who has read an acquiring agreement; capital-inefficient for honest merchants, which is a feature — it prices merchant risk.",
+      cost: function (volume, rate) { return volume * (rate / 100) * 2.5; }, // reserve = 2.5x expected dispute volume
+      label: "Reserve to post (2.5× expected)",
+      note: "capital parked, not spent — demo multiple"
+    },
+    attest: {
+      title: "Delivery attestation release",
+      body: "Funds release when a third party attests to delivery — a carrier scan, a signed receipt, an oracle. No attestation by the deadline, funds return.",
+      loss: "The attester. A false or negligent attestation moves the loss to whoever signed it (and their insurer) — the direct port of 3DS liability shift: authenticate, and the loss is yours to lose.",
+      tradeoff: "The strongest incentive design and the hardest dependency — it imports an oracle problem into every dispute. Works where delivery is observable; fails for services and digital goods.",
+      cost: function (volume, rate) { return (volume / 40) * 0.05; }, // 5¢ attestation per txn at $40 avg ticket demo
+      label: "Attestation fees / mo",
+      note: "per-transaction oracle fee, demo"
+    }
+  };
+  var mech = "escrow";
+  function renderMech() {
+    var m = MECH[mech];
+    $("mech-panel").innerHTML =
+      '<h4 style="font-family:var(--sans); font-size:var(--fs-2); font-weight:600; margin-bottom:var(--s1);">' + m.title + "</h4>" +
+      '<p style="font-size:var(--fs-1); color:var(--text-dim); max-width:var(--prose);">' + m.body + "</p>" +
+      '<p style="font-size:var(--fs-1); max-width:var(--prose);"><strong style="color:var(--accent); font-family:var(--sans);">Who eats the loss:</strong> ' + m.loss + "</p>" +
+      '<p style="font-size:var(--fs-1); color:var(--text-dim); max-width:var(--prose); margin-bottom:0;"><strong>Trade-off:</strong> ' + m.tradeoff + "</p>";
+    renderDisputeCost();
+  }
+  function renderDisputeCost() {
+    if (!$("mech-cost")) return;
+    var volume = +$("volume").value;
+    var rate = +$("dispute-rate").value;
+    $("dispute-rate-out").textContent = rate.toFixed(1) + "%";
+    var m = MECH[mech];
+    var c = m.cost(volume, rate);
+    $("mech-cost").textContent = fmt$(c);
+    $("mech-cost-label").textContent = m.label;
+    $("mech-cost-note").textContent = m.note;
+    $("mech-bps").textContent = Math.round(c / volume * 10000) + " bps";
+  }
+  document.querySelectorAll("[data-mech]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      mech = b.getAttribute("data-mech");
+      document.querySelectorAll("[data-mech]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      renderMech();
+    });
+  });
+  $("dispute-rate").addEventListener("input", renderDisputeCost);
+
+  /* ---- 6 · treasury ---- */
+  function renderTreasury() {
+    var volume = +$("volume").value;
+    var share = +$("hold-share").value;
+    var threshold = +$("sweep-threshold").value;
+    $("hold-share-out").textContent = share + "%";
+    $("sweep-out").textContent = "$" + threshold.toLocaleString("en-US");
+    var heldMonthly = volume * share / 100;
+    var avgBalance = Math.min(threshold, Math.max(heldMonthly / 4, heldMonthly && threshold / 2));
+    $("avg-exposure").textContent = heldMonthly === 0 ? "$0" : fmt$(avgBalance);
+    $("depeg-cost").textContent = heldMonthly === 0 ? "$0" : fmt$(avgBalance * 0.005);
+    var sweeps = threshold > 0 ? Math.floor(heldMonthly / threshold) : 0;
+    $("sweeps-mo").textContent = String(sweeps);
+  }
+  ["hold-share", "sweep-threshold"].forEach(function (id) { $(id).addEventListener("input", renderTreasury); });
+  $("volume").addEventListener("input", renderTreasury);
+
+  renderCosts();
+  renderMech();
+  renderTreasury();
+})();
+</script>
+</body>
+</html>
