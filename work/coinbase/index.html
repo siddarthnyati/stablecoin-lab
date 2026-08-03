@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coinbase, re-read — the product line is complete; the experience isn't</title>
+<meta name="description" content="Case study: retail-experience gaps in discoverability, comprehension and practice — and the surfaces that close them. Concept prototype with illustrative data.">
+<meta property="og:title" content="Coinbase, re-read — the product line is complete; the experience isn't">
+<meta property="og:description" content="Discoverability, comprehension and safe practice for the user who is curious but not yet convinced.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="../../assets/og.png">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="wordmark" href="../../" aria-label="Siddarth Nyati — home">
+      <svg class="tick" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="2.5" x2="18" y2="2.5" stroke="#e7eaee" stroke-width="1.6"/><line x1="0" y1="7.5" x2="18" y2="7.5" stroke="#7d8590" stroke-width="1.6" stroke-dasharray="2 3"/><circle cx="12" cy="2.5" r="2.2" fill="#e2b33c"/></svg>
+      Siddarth Nyati
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="../stablecoin-settle/">Parity</a>
+      <a href="../../from-card-rails/">From card rails</a>
+      <a href="../../how-i-run-programs/">How I run programs</a>
+      <a href="../../about/">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <header class="case-header">
+      <p class="eyebrow"><span class="num">POC 3</span> &middot; Retail experience</p>
+      <h1>Coinbase, re-read</h1>
+      <p class="lede">The product line is broad and, in places like US futures, has been for years. The gaps I found are in the retail <em>experience</em> &mdash; discoverability, comprehension, and safe practice for the user who is curious but not yet convinced.</p>
+
+      <figure class="rails-mini" role="img" aria-label="Miniature rails diagram: card rail answers all three questions; stablecoin rail leaves identity and loss allocation open.">
+        <svg viewBox="0 0 560 84" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="24" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">CARD RAIL</text>
+          <line x1="0" y1="36" x2="560" y2="36" stroke="#3a4048" stroke-width="1.2"/>
+          <circle cx="330" cy="36" r="5" fill="#e2b33c"/>
+          <circle cx="420" cy="36" r="5" fill="#e2b33c"/>
+          <circle cx="510" cy="36" r="5" fill="#e2b33c"/>
+          <text x="0" y="60" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">STABLECOIN RAIL</text>
+          <line x1="0" y1="72" x2="560" y2="72" stroke="#3a4048" stroke-width="1.2" stroke-dasharray="4 5"/>
+          <circle cx="330" cy="72" r="5" fill="none" stroke="#e2b33c" stroke-width="1.5"/>
+          <circle cx="420" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+          <circle cx="510" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+        </svg>
+      </figure>
+
+      <p class="page-badge"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
+
+      <dl class="meta">
+        <div><dt>Status</dt><dd>Concept &mdash; never shipped, no users, not commissioned</dd></div>
+        <div><dt>Framing</dt><dd>Experience gaps, not product-line gaps</dd></div>
+        <div><dt>Prototype</dt><dd><a href="https://lovable.dev/preview/H0XJvqngNehQeC9mXD0cVk53voNqN4Am" target="_blank" rel="noopener">Open live prototype &#8599;</a></dd></div>
+      </dl>
+    </header>
+
+    <section class="section" style="padding-top: var(--s5);">
+      <p class="eyebrow">Premise</p>
+      <p>For millions of people, Coinbase is not <em>an</em> exchange; it is what crypto looks like. That makes its retail experience a public utility in a way its product roadmap isn&rsquo;t &mdash; and re-reading that experience as a curious, unconvinced retail user, the friction isn&rsquo;t missing products. It&rsquo;s that capable products are hard to find, harder to understand, and impossible to rehearse.</p>
+
+      <p class="eyebrow" style="margin-top: var(--s5);">Why it&rsquo;s hard</p>
+      <p>An exchange&rsquo;s revenue gradient points at its most active traders, so the interface drifts toward the people who already trade &mdash; density, tickers, order types. The user this POC serves is the opposite persona: they will make five decisions a year, each one anxious. Serving both from one surface is a real product-architecture problem, not a redesign.</p>
+
+      <p class="eyebrow" style="margin-top: var(--s5);">The insight</p>
+      <p>Every addition in this concept is the same move: take something that exists in the market &mdash; in several cases, in Coinbase&rsquo;s own line-up &mdash; and rebuild the <em>path to it</em>: discover it in context, understand it in plain language, practise it with nothing at stake. Practice is the second appearance of this site&rsquo;s core belief: people don&rsquo;t adopt financial products they can&rsquo;t rehearse.</p>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">What was built</p>
+      <h2 style="max-width: 26ch;">Five surfaces, one persona.</h2>
+
+      <figure class="artifact">
+        <div class="chrome">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>Concept additions &mdash; retail home</span>
+          <span class="demo-badge">Illustrative data</span>
+        </div>
+        <div class="body" style="display:grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); font-family: var(--sans);">
+          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
+            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Practice account (demo)</p>
+            <dl class="kv" style="font-size: var(--fs-0);">
+              <dt>Paper balance</dt><dd>$10,000 virtual &mdash; demo</dd>
+              <dt>Open positions</dt><dd>3 simulated &mdash; no real funds</dd>
+              <dt>Graduation</dt><dd>Prompted after 10 practice trades + quiz</dd>
+            </dl>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
+            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Learn &amp; analyse</p>
+            <dl class="kv" style="font-size: var(--fs-0);">
+              <dt>Learning module</dt><dd>courses tied to the screen you&rsquo;re on</dd>
+              <dt>Portfolio analysis</dt><dd>concentration &middot; drawdown, plain English</dd>
+              <dt>Events &amp; predictions</dt><dd>outcome markets, comprehension-first</dd>
+            </dl>
+          </div>
+        </div>
+        <figcaption>Recreated in-page from the prototype. The additions rebuild paths, not products.</figcaption>
+      </figure>
+
+      <ol class="callouts">
+        <li><strong>Paper trading</strong> &mdash; a full practice account with virtual balance and a graduation moment into funded trading. The belief, applied to an exchange.</li>
+        <li><strong>Learning module</strong> &mdash; lessons anchored to the surface the user is looking at, not a separate academy tab they&rsquo;ll never open.</li>
+        <li><strong>Portfolio analysis</strong> &mdash; concentration, drawdown and exposure in sentences, not Greek letters. Analysis for the five-decisions-a-year investor.</li>
+        <li><strong>Derivatives, presented for comprehension</strong> &mdash; the concept&rsquo;s framing here is deliberate: US retail futures exist at Coinbase and have since around 2023. What this surface adds is the on-ramp &mdash; what leverage means in dollars, rehearsed in the paper account before margin is real.</li>
+        <li><strong>Events &amp; prediction trading</strong> &mdash; outcome markets surfaced with the same comprehension-first treatment, because binary questions are how new users actually think about markets.</li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Success criteria</p>
+      <h2 style="max-width: 26ch;">Volume is the wrong scoreboard for this persona.</h2>
+      <p style="max-width: var(--prose);">The obvious exchange metrics &mdash; trading volume, DAU &mdash; are maximised by the power users this POC isn&rsquo;t for; a churning day-trader beats a hundred careful newcomers on both. The north star has to price confidence, not activity.</p>
+      <div class="overflow-x">
+        <table class="metric-table">
+          <thead><tr><th scope="col">Metric</th><th scope="col">What it tells you</th><th scope="col">Note</th></tr></thead>
+          <tbody>
+            <tr class="north"><td>Paper &rarr; funded conversion</td><td>A user who practised, then committed real money &mdash; confidence built and cashed in one number.</td><td>North star. Gate on comprehension-quiz pass to keep it honest.</td></tr>
+            <tr><td>Time-to-comprehension</td><td>How fast a new user can correctly answer what they own and what it can lose.</td><td>Measured in the learning module, sampled.</td></tr>
+            <tr><td>90-day newcomer retention</td><td>Whether careful users stay once the novelty fades.</td><td>The commercial case for the persona.</td></tr>
+            <tr><td>Support contact rate per new feature</td><td>Comprehension failure shows up here first.</td><td>Falling contact rate = the paths are working.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">What I got wrong &middot; what&rsquo;s next</p>
+      <div class="wrong-block">
+        <h3>What I got wrong</h3>
+        <ul>
+          <li><strong>My first framing was &ldquo;Coinbase doesn&rsquo;t have derivatives.&rdquo; It was factually wrong.</strong> Coinbase has offered US futures since around 2023. The error taught me the real shape of the POC: the gap was never the product line &mdash; it was that a retail user like my persona couldn&rsquo;t find, understand or rehearse what already existed. I rebuilt the concept around experience gaps, and it got stronger. Check the claim before you design the fix.</li>
+          <li><strong>I treated prediction markets as a feature.</strong> Event contracts sit inside a live regulatory perimeter; shipping them is a licensing and compliance program with a UI on top, not the reverse. The prototype&rsquo;s cheerful tab understates a year of real work.</li>
+          <li><strong>Portfolio analysis assumed data that doesn&rsquo;t exist.</strong> Useful analysis needs cost basis and holdings across wallets and venues; retail users have neither in one place. The surface demos beautifully on demo data &mdash; which is exactly the trap.</li>
+        </ul>
+      </div>
+      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>What I&rsquo;d do next:</strong> test the graduation mechanic &mdash; the paper-to-funded moment &mdash; as the single experiment, with the quiz gate on and off; and scope events trading as the compliance program it really is before another pixel is drawn.</p>
+      <p style="margin-top: var(--s3);"><a class="btn" href="https://lovable.dev/preview/H0XJvqngNehQeC9mXD0cVk53voNqN4Am" target="_blank" rel="noopener">Open the live prototype &#8599;</a></p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container inner">
+    <p>Concept prototype &mdash; illustrative data throughout; nothing shipped, had users, or was commissioned. Not affiliated with Coinbase.</p>
+    <p><a href="../nft-lending/">Next: NFT lending &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

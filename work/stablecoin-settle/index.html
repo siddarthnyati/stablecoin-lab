@@ -216,11 +216,11 @@
         <div class="console-body">
           <div class="choice-grid">
             <button class="choice" type="button" data-custody="self" aria-pressed="true">
-              <h4>Self-custody</h4>
+              <h3>Self-custody</h3>
               <p>Merchant holds its own keys &mdash; hardware or multisig. Nobody between the merchant and its money.</p>
             </button>
             <button class="choice" type="button" data-custody="qualified" aria-pressed="false">
-              <h4>Qualified custodian</h4>
+              <h3>Qualified custodian</h3>
               <p>A regulated third party holds the keys under a custody agreement. Someone to call, and to blame.</p>
             </button>
           </div>
@@ -500,7 +500,7 @@
   function renderMech() {
     var m = MECH[mech];
     $("mech-panel").innerHTML =
-      '<h4 style="font-family:var(--sans); font-size:var(--fs-2); font-weight:600; margin-bottom:var(--s1);">' + m.title + "</h4>" +
+      '<h3 style="font-family:var(--sans); font-size:var(--fs-2); font-weight:600; margin-bottom:var(--s1);">' + m.title + "</h3>" +
       '<p style="font-size:var(--fs-1); color:var(--text-dim); max-width:var(--prose);">' + m.body + "</p>" +
       '<p style="font-size:var(--fs-1); max-width:var(--prose);"><strong style="color:var(--accent); font-family:var(--sans);">Who eats the loss:</strong> ' + m.loss + "</p>" +
       '<p style="font-size:var(--fs-1); color:var(--text-dim); max-width:var(--prose); margin-bottom:0;"><strong>Trade-off:</strong> ' + m.tradeoff + "</p>";

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I run programs — discovery to scale/no-scale</title>
+<meta name="description" content="A stablecoin POC run as a program: milestone gates with entry and exit criteria, dependency graph, risk register, KPI tree, and a seven-gate governance model.">
+<meta property="og:title" content="How I run programs — discovery to scale/no-scale">
+<meta property="og:description" content="CryptoPos as the lifecycle: gates, dependencies, risks, KPIs, governance. Diagrams, not paragraphs.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="../assets/og.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  /* page-local diagram styles */
+  .gates { display: grid; gap: var(--s2); grid-template-columns: 1fr; counter-reset: gate; }
+  @media (min-width: 900px) { .gates { grid-template-columns: repeat(4, 1fr); } }
+  .gate { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-raised); padding: var(--s3); position: relative; counter-increment: gate; }
+  .gate h3 { font-family: var(--sans); font-size: var(--fs-2); font-weight: 600; margin-bottom: 2px; }
+  .gate h3::before { content: counter(gate, decimal-leading-zero); font-family: var(--mono); color: var(--accent); margin-right: 10px; font-size: var(--fs-0); }
+  .gate .dur { font-family: var(--sans); font-size: var(--fs-0); color: var(--text-faint); margin-bottom: var(--s2); }
+  .gate dl { font-family: var(--sans); font-size: var(--fs-0); margin: 0; }
+  .gate dt { font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin: var(--s2) 0 4px; }
+  .gate dd { margin: 0 0 4px; color: var(--text-dim); padding-left: 14px; position: relative; }
+  .gate dd::before { content: "—"; position: absolute; left: 0; color: var(--text-faint); }
+  .gate .verdict { margin-top: var(--s2); font-family: var(--sans); font-size: var(--fs-0); font-weight: 600; color: var(--accent); }
+
+  .kpi-tree { font-family: var(--sans); font-size: var(--fs-1); }
+  .kpi-tree .root { border: 1px solid var(--accent); border-radius: var(--radius); background: var(--accent-soft); padding: var(--s2) var(--s3); display: inline-block; }
+  .kpi-tree .root strong { display: block; }
+  .kpi-tree .root span { font-size: var(--fs-0); color: var(--text-dim); }
+  .kpi-tree ul { list-style: none; margin: 0; padding: 0 0 0 var(--s3); border-left: 1px solid var(--border-strong); max-width: none; }
+  .kpi-tree > ul { margin-top: var(--s2); margin-left: var(--s3); }
+  .kpi-tree li { position: relative; padding: var(--s2) 0 var(--s2) var(--s3); margin: 0; }
+  .kpi-tree li::before { content: ""; position: absolute; left: 0; top: 50%; width: var(--s2); height: 1px; background: var(--border-strong); }
+  .kpi-tree li strong { display: block; }
+  .kpi-tree li .inst { display: block; font-size: var(--fs-0); color: var(--text-faint); font-family: var(--mono); margin-top: 2px; }
+  .kpi-tree li .why { display: block; font-size: var(--fs-0); color: var(--text-dim); margin-top: 2px; }
+
+  .risk-dots { display: inline-flex; gap: 3px; }
+  .risk-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--text-faint); }
+  .risk-dots i.on { background: var(--accent); border-color: var(--accent); }
+
+  .gov { display: grid; gap: var(--s1); grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .gov { grid-template-columns: repeat(7, 1fr); } }
+  .gov .g { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-raised); padding: var(--s2); font-family: var(--sans); font-size: var(--fs-0); text-align: center; position: relative; }
+  .gov .g b { display: block; font-family: var(--mono); color: var(--accent); font-weight: 400; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="wordmark" href="../" aria-label="Siddarth Nyati — home">
+      <svg class="tick" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="2.5" x2="18" y2="2.5" stroke="#e7eaee" stroke-width="1.6"/><line x1="0" y1="7.5" x2="18" y2="7.5" stroke="#7d8590" stroke-width="1.6" stroke-dasharray="2 3"/><circle cx="12" cy="2.5" r="2.2" fill="#e2b33c"/></svg>
+      Siddarth Nyati
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="../work/stablecoin-settle/">Parity</a>
+      <a href="../from-card-rails/">From card rails</a>
+      <a href="../how-i-run-programs/">How I run programs</a>
+      <a href="../about/">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <header class="case-header">
+      <p class="eyebrow">Method</p>
+      <h1 style="max-width: 20ch;">How I run programs</h1>
+      <p class="lede">The Stablecoin Labs job is a lifecycle: discovery, POC with success criteria, validation, then a scale or no-scale business case. Here is <a href="../work/cryptopos/">CryptoPos</a> run through that lifecycle as if it were a funded program &mdash; gates, dependencies, risks, KPIs, governance. Diagrams over paragraphs.</p>
+      <p class="page-badge"><span class="demo-badge">Planning artifact &mdash; illustrative program, real method</span></p>
+    </header>
+
+    <!-- ===================== milestone map ===================== -->
+    <section class="section" style="padding-top: var(--s5);">
+      <p class="eyebrow">Milestone map</p>
+      <h2 style="max-width: 28ch;">Four gates. Each has a door that closes.</h2>
+      <p style="color: var(--text-dim); max-width: var(--prose);">Entry criteria stop a stage starting on vibes; exit criteria stop it ending on momentum. Durations are illustrative planning values, not a record of anything that ran.</p>
+
+      <div class="gates" style="margin-top: var(--s4);">
+        <div class="gate">
+          <h3>Discovery</h3>
+          <p class="dur">&asymp; 4 weeks (demo)</p>
+          <dl>
+            <dt>Entry</dt>
+            <dd>Named merchant segment where card economics pinch (small-ticket, high-frequency)</dd>
+            <dd>Problem hypothesis written before any solution work</dd>
+            <dt>Exit</dt>
+            <dd>20+ merchant interviews synthesised; acceptance blockers ranked by cost, not anecdote</dd>
+            <dd>Success criteria for the POC agreed <em>before</em> the POC exists</dd>
+          </dl>
+          <p class="verdict">Kill here if: the pain ranks below #3 for the segment.</p>
+        </div>
+        <div class="gate">
+          <h3>POC</h3>
+          <p class="dur">&asymp; 6 weeks (demo)</p>
+          <dl>
+            <dt>Entry</dt>
+            <dd>Success criteria signed; dependency owners named (see graph below)</dd>
+            <dd>Compliance review scheduled, not assumed</dd>
+            <dt>Exit</dt>
+            <dd>Working prototype covering charge, settle, refund &mdash; the unhappy path included</dd>
+            <dd>Unit economics modelled per segment against the card benchmark</dd>
+          </dl>
+          <p class="verdict">Kill here if: modelled all-in cost can&rsquo;t beat cards for any real segment.</p>
+        </div>
+        <div class="gate">
+          <h3>Validation</h3>
+          <p class="dur">&asymp; 8&ndash;12 weeks (demo)</p>
+          <dl>
+            <dt>Entry</dt>
+            <dd>Pilot cohort sized for signal, instrumented for the KPI tree</dd>
+            <dd>Risk register mitigations in place for every high-likelihood row</dd>
+            <dt>Exit</dt>
+            <dd>North-star read at day 90 with confidence intervals, not anecdotes</dd>
+            <dd>Dispute &amp; refund incidents documented with resolution times</dd>
+          </dl>
+          <p class="verdict">Kill here if: repeat acceptance decays past week 6 despite incentives off.</p>
+        </div>
+        <div class="gate">
+          <h3>Scale / no-scale</h3>
+          <p class="dur">Decision, not a phase</p>
+          <dl>
+            <dt>Entry</dt>
+            <dd>Validation data complete; costs restated with pilot actuals</dd>
+            <dt>Exit</dt>
+            <dd>A business case that survives finance review &mdash; or a written no-scale memo with what we learned and what would change the answer</dd>
+          </dl>
+          <p class="verdict">A well-argued <em>no</em> is a success outcome. Zombie pilots are the failure mode.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== dependency graph ===================== -->
+    <section class="section">
+      <p class="eyebrow">Dependency graph</p>
+      <h2 style="max-width: 28ch;">The POC is the easy node.</h2>
+      <figure class="rails" role="img" aria-label="Dependency graph for the CryptoPos pilot. Blocking dependencies: custody provider, on/off-ramp partner, BSA and compliance review. Constraining dependencies: chain finality service levels, tax reporting. Compliance review feeds both custody and on/off-ramp selection.">
+        <svg viewBox="0 0 960 380" xmlns="http://www.w3.org/2000/svg">
+          <title>CryptoPos pilot — dependency graph</title>
+          <defs>
+            <marker id="darr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0.6 L7.4,4 L0,7.4" fill="none" stroke="#737d89" stroke-width="1.2"/>
+            </marker>
+          </defs>
+
+          <!-- center -->
+          <g class="node">
+            <rect x="390" y="160" width="180" height="60" rx="4" fill="#111318" stroke="#e2b33c"/>
+            <text x="480" y="186" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="14" fill="#e7eaee">CryptoPos pilot</text>
+            <text x="480" y="204" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" fill="#9aa3ae">validation cohort</text>
+          </g>
+
+          <!-- satellites -->
+          <g class="node">
+            <rect x="60" y="40" width="200" height="56" rx="4" fill="#111318" stroke="rgba(231,234,238,.16)"/>
+            <text x="160" y="63" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" fill="#e7eaee">Custody provider</text>
+            <text x="160" y="81" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" fill="#9aa3ae">contract + integration &middot; blocking</text>
+          </g>
+          <g class="node">
+            <rect x="60" y="270" width="200" height="56" rx="4" fill="#111318" stroke="rgba(231,234,238,.16)"/>
+            <text x="160" y="293" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" fill="#e7eaee">On/off-ramp partner</text>
+            <text x="160" y="311" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" fill="#9aa3ae">fiat legs &middot; blocking</text>
+          </g>
+          <g class="node">
+            <rect x="700" y="40" width="200" height="56" rx="4" fill="#111318" stroke="rgba(231,234,238,.16)"/>
+            <text x="800" y="63" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" fill="#e7eaee">Chain finality SLOs</text>
+            <text x="800" y="81" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" fill="#9aa3ae">constrains checkout UX</text>
+          </g>
+          <g class="node">
+            <rect x="700" y="270" width="200" height="56" rx="4" fill="#111318" stroke="rgba(231,234,238,.16)"/>
+            <text x="800" y="293" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" fill="#e7eaee">Tax reporting</text>
+            <text x="800" y="311" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" fill="#9aa3ae">cost basis &middot; merchant 1099s</text>
+          </g>
+          <g class="node">
+            <rect x="380" y="20" width="200" height="56" rx="4" fill="#111318" stroke="rgba(231,234,238,.16)"/>
+            <text x="480" y="43" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" fill="#e7eaee">BSA / compliance review</text>
+            <text x="480" y="61" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11" fill="#9aa3ae">longest pole &middot; starts first</text>
+          </g>
+
+          <!-- edges -->
+          <line x1="260" y1="90" x2="390" y2="165" stroke="#737d89" stroke-width="1.2" marker-end="url(#darr)"/>
+          <line x1="260" y1="285" x2="390" y2="212" stroke="#737d89" stroke-width="1.2" marker-end="url(#darr)"/>
+          <line x1="480" y1="76" x2="480" y2="156" stroke="#737d89" stroke-width="1.2" marker-end="url(#darr)"/>
+          <line x1="700" y1="90" x2="574" y2="165" stroke="#737d89" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#darr)"/>
+          <line x1="700" y1="285" x2="574" y2="212" stroke="#737d89" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#darr)"/>
+          <!-- compliance feeds partner selection -->
+          <path d="M 380 55 C 300 55 240 55 205 96" fill="none" stroke="#737d89" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#darr)"/>
+          <path d="M 380 48 C 240 40 120 120 130 266" fill="none" stroke="#737d89" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#darr)"/>
+
+          <text x="20" y="365" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="11.5" fill="#9aa3ae">solid = blocking &nbsp;&middot;&nbsp; dashed = constrains scope or feeds selection &nbsp;&middot;&nbsp; compliance review starts before any partner is signed</text>
+        </svg>
+      </figure>
+      <p style="max-width: var(--prose); color: var(--text-dim);">The sequencing insight most POCs miss: the compliance review is the longest pole, so it starts first and its findings feed partner selection &mdash; not the other way round. Chain finality and tax reporting don&rsquo;t block the build, but they bound what the pilot may promise merchants.</p>
+    </section>
+
+    <!-- ===================== risk register ===================== -->
+    <section class="section">
+      <p class="eyebrow">Risk register</p>
+      <h2 style="max-width: 26ch;">Six ways it dies, owned in advance.</h2>
+      <div class="overflow-x" style="margin-top: var(--s4);">
+        <table class="metric-table">
+          <thead><tr><th scope="col">Risk</th><th scope="col">Likelihood</th><th scope="col">Blast radius</th><th scope="col">Mitigation</th><th scope="col">Owner</th></tr></thead>
+          <tbody>
+            <tr><td>Stablecoin depeg during pilot</td><td><span class="risk-dots" role="img" aria-label="low"><i class="on"></i><i></i><i></i></span></td><td>Merchant trust — unrecoverable for the cohort</td><td>Auto-sweep thresholds on by default; depeg circuit-breaker pauses acceptance</td><td>Treasury PM</td></tr>
+            <tr><td>Off-ramp partner outage</td><td><span class="risk-dots" role="img" aria-label="medium"><i class="on"></i><i class="on"></i><i></i></span></td><td>Settlement delays across all merchants</td><td>Second ramp contracted at pilot start; failover drilled, not documented</td><td>Partnerships</td></tr>
+            <tr><td>Compliance finding lands late</td><td><span class="risk-dots" role="img" aria-label="medium"><i class="on"></i><i class="on"></i><i></i></span></td><td>Program pause; credibility with legal</td><td>BSA review is gate-1 entry criterion; findings tracked as blocking work items</td><td>Program lead</td></tr>
+            <tr><td>Dispute volume exceeds refund design</td><td><span class="risk-dots" role="img" aria-label="medium"><i class="on"></i><i class="on"></i><i></i></span></td><td>Merchant losses; support load</td><td>Refund reserve sized at 2.5&times; expected disputes (demo multiple); weekly incident review</td><td>Risk PM</td></tr>
+            <tr><td>Merchant key compromise</td><td><span class="risk-dots" role="img" aria-label="low"><i class="on"></i><i></i><i></i></span></td><td>Single merchant, total loss</td><td>Qualified custody default for pilot; self-custody requires explicit opt-in + limits</td><td>Security</td></tr>
+            <tr><td>Rewards economics invert</td><td><span class="risk-dots" role="img" aria-label="high"><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td>Quiet margin bleed per merchant</td><td>Margin-floor cap in configurator; redemption cost surfaced weekly to merchants</td><td>Product</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top: var(--s2);">Likelihoods are planning judgments for an illustrative pilot, not measurements.</p>
+    </section>
+
+    <!-- ===================== KPI tree ===================== -->
+    <section class="section">
+      <p class="eyebrow">KPI tree</p>
+      <h2 style="max-width: 26ch;">One north star, four drivers, named events.</h2>
+      <p style="color: var(--text-dim); max-width: var(--prose);">Every leaf carries its instrumentation &mdash; a metric without an event name is a wish.</p>
+      <div class="kpi-tree" style="margin-top: var(--s4);">
+        <div class="root">
+          <strong>Day-90 active acceptance ★</strong>
+          <span>merchants transacting weekly, one quarter in, incentives off</span>
+        </div>
+        <ul>
+          <li>
+            <strong>Activation</strong>
+            <span class="why">onboarded &rarr; first live charge; friction diagnostic</span>
+            <span class="inst">merchant_onboarded &middot; first_charge_settled &middot; time-to-first-charge</span>
+          </li>
+          <li>
+            <strong>Settlement mix</strong>
+            <span class="why">share kept as stablecoin vs auto-converted &mdash; revealed trust</span>
+            <span class="inst">settlement_policy_set &middot; sweep_executed{policy, threshold}</span>
+          </li>
+          <li>
+            <strong>Rewards loop health</strong>
+            <span class="why">redemption rate inside margin floor = the incentive is working and affordable</span>
+            <span class="inst">reward_accrued &middot; reward_redeemed &middot; margin_floor_hit</span>
+          </li>
+          <li>
+            <strong>Dispute &amp; refund load</strong>
+            <span class="why">leading indicator of the missing rail hurting; rises before losses do</span>
+            <span class="inst">refund_requested{unit} &middot; dispute_opened &middot; resolution_time</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== governance ===================== -->
+    <section class="section">
+      <p class="eyebrow">Governance</p>
+      <h2 style="max-width: 28ch;">Seven gates, humans at every one.</h2>
+      <p style="max-width: var(--prose);">This is the review process I actually run &mdash; applied across four platform initiatives and 104 acceptance criteria. Nothing advances to the next gate without a named human signing the previous one. It is deliberately boring; boring is what makes speed safe.</p>
+      <div class="gov" style="margin-top: var(--s4);" role="list">
+        <div class="g" role="listitem"><b>G1</b>Feature definition</div>
+        <div class="g" role="listitem"><b>G2</b>Acceptance criteria</div>
+        <div class="g" role="listitem"><b>G3</b>Design</div>
+        <div class="g" role="listitem"><b>G4</b>Code</div>
+        <div class="g" role="listitem"><b>G5</b>Test</div>
+        <div class="g" role="listitem"><b>G6</b>Dependencies</div>
+        <div class="g" role="listitem"><b>G7</b>PRs</div>
+      </div>
+      <p style="margin-top: var(--s4); max-width: var(--prose); color: var(--text-dim);">The same discipline runs this site&rsquo;s honesty rules: every number on every page is either sourced or labelled illustrative, and the gaps are logged openly in <a href="https://github.com/siddarthnyati" target="_blank" rel="noopener">the repo</a> rather than papered over. Process is portfolio.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container inner">
+    <p>Illustrative program built on the CryptoPos concept &mdash; the method is real; no pilot ran.</p>
+    <p><a href="../work/cryptopos/">The POC behind it &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

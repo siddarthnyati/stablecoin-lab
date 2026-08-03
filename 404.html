@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — no such route on either rail</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script>
+/* GitHub Pages project sites serve from a subpath; fix asset hrefs at runtime. */
+(function () {
+  var parts = location.pathname.split("/").filter(Boolean);
+  if (parts.length && parts[0] !== "assets") {
+    var base = "/" + parts[0] + "/";
+    document.querySelectorAll("link[href^='/assets/']").forEach(function (l) {
+      l.href = base + l.getAttribute("href").slice(1);
+    });
+  }
+})();
+</script>
+</head>
+<body>
+<main class="err">
+  <div class="container">
+    <p class="code">404 &middot; NO ROUTE</p>
+    <p class="page-badge" style="margin: var(--s2) 0 0;"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
+    <h1 style="max-width: 22ch; margin-top: var(--s2);">This transaction found no rail.</h1>
+    <p style="color: var(--text-dim); max-width: var(--prose);">The address is valid-looking but nothing answers at it &mdash; which, on an irreversible rail, is exactly why you check before you send. Nothing was lost. Two known-good routes:</p>
+    <p style="display:flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s4);">
+      <a class="btn primary" id="link-home" href="/">Home</a>
+      <a class="btn" id="link-parity" href="/work/stablecoin-settle/">Parity, the interactive POC</a>
+    </p>
+  </div>
+</main>
+<script>
+(function () {
+  var first = location.pathname.split("/").filter(Boolean)[0];
+  var base = first && first !== "assets" && first !== "work" ? "/" + first + "/" : "/";
+  document.getElementById("link-home").href = base;
+  document.getElementById("link-parity").href = base + "work/stablecoin-settle/";
+})();
+</script>
+</body>
+</html>

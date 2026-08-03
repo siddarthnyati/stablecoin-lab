@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CryptoPos — merchant acceptance fails on economics, not technology</title>
+<meta name="description" content="Case study: a point-of-sale prototype for merchant crypto acceptance with configurable rewards. Concept prototype with illustrative data.">
+<meta property="og:title" content="CryptoPos — merchant acceptance fails on economics, not technology">
+<meta property="og:description" content="A POS prototype that prices the acceptance gap — and a rewards loop that pays merchants to close it.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="../../assets/og.png">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="wordmark" href="../../" aria-label="Siddarth Nyati — home">
+      <svg class="tick" viewBox="0 0 18 10" aria-hidden="true"><line x1="0" y1="2.5" x2="18" y2="2.5" stroke="#e7eaee" stroke-width="1.6"/><line x1="0" y1="7.5" x2="18" y2="7.5" stroke="#7d8590" stroke-width="1.6" stroke-dasharray="2 3"/><circle cx="12" cy="2.5" r="2.2" fill="#e2b33c"/></svg>
+      Siddarth Nyati
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="../stablecoin-settle/">Parity</a>
+      <a href="../../from-card-rails/">From card rails</a>
+      <a href="../../how-i-run-programs/">How I run programs</a>
+      <a href="../../about/">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <header class="case-header">
+      <p class="eyebrow"><span class="num">POC 2</span> &middot; Merchant acceptance &amp; rewards</p>
+      <h1>CryptoPos</h1>
+      <p class="lede">Merchant crypto acceptance fails on economics, not technology. The QR code has worked for a decade; the business case still doesn&rsquo;t. This prototype makes the economics visible at the counter &mdash; and configurable.</p>
+
+      <figure class="rails-mini" role="img" aria-label="Miniature rails diagram: card rail answers all three questions; stablecoin rail leaves identity and loss allocation open.">
+        <svg viewBox="0 0 560 84" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="24" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">CARD RAIL</text>
+          <line x1="0" y1="36" x2="560" y2="36" stroke="#3a4048" stroke-width="1.2"/>
+          <circle cx="330" cy="36" r="5" fill="#e2b33c"/>
+          <circle cx="420" cy="36" r="5" fill="#e2b33c"/>
+          <circle cx="510" cy="36" r="5" fill="#e2b33c"/>
+          <text x="0" y="60" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="10" letter-spacing="1.5" fill="#737d89">STABLECOIN RAIL</text>
+          <line x1="0" y1="72" x2="560" y2="72" stroke="#3a4048" stroke-width="1.2" stroke-dasharray="4 5"/>
+          <circle cx="330" cy="72" r="5" fill="none" stroke="#e2b33c" stroke-width="1.5"/>
+          <circle cx="420" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+          <circle cx="510" cy="72" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+        </svg>
+      </figure>
+
+      <p class="page-badge"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
+
+      <dl class="meta">
+        <div><dt>Status</dt><dd>Concept &mdash; never shipped, no users</dd></div>
+        <div><dt>Surfaces</dt><dd>Merchant Mode &middot; User Wallet</dd></div>
+        <div><dt>Assets</dt><dd>BTC &middot; ETH &middot; USDC &middot; SOL</dd></div>
+        <div><dt>Prototype</dt><dd><a href="https://lovable.dev/preview/2PPeMp5KfySdjx2olWqeOC2v9u5gUVrz" target="_blank" rel="noopener">Open live prototype &#8599;</a></dd></div>
+      </dl>
+    </header>
+
+    <section class="section" style="padding-top: var(--s5);">
+      <p class="eyebrow">Premise</p>
+      <p>A merchant who wants to accept crypto today picks between two bad shapes: a custodial processor that converts instantly &mdash; the merchant never touches the asset and pays a spread for the privilege &mdash; or a raw wallet address taped to the register, with no receipts, no refunds, no reporting, and no one to call. CryptoPos is the missing middle: a point of sale where acceptance, settlement policy and rewards are merchant decisions, made once, visible always.</p>
+
+      <p class="eyebrow" style="margin-top: var(--s5);">Why it&rsquo;s hard</p>
+      <p>Three costs hide behind the QR code. <strong>Settlement volatility</strong> &mdash; between the sale and the sweep, the asset moves; a coffee margin does not survive a 3% move in BTC. <strong>Refund semantics</strong> &mdash; when the price has moved, do you return the tokens or the dollars? Someone loses either way, and nobody has decided who in advance. <strong>No dispute rail</strong> &mdash; every contested charge is a customer-service improvisation. None of these are technology problems. All of them are priced into why merchants say no.</p>
+
+      <p class="eyebrow" style="margin-top: var(--s5);">The insight</p>
+      <p>Merchants change behaviour when the economics pay for it &mdash; and card rails have run this exact play for years. Enriched-data programs offer merchants interchange relief, priced in basis points, in exchange for sending richer transaction data. Behaviour followed price. CryptoPos applies the same logic to acceptance: make every cost visible in basis points at configuration time, and let the rewards loop &mdash; funded consciously, not accidentally &mdash; be the incentive that closes the gap.</p>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">What was built</p>
+      <h2 style="max-width: 26ch;">Two surfaces, one economic loop.</h2>
+
+      <figure class="artifact">
+        <div class="chrome">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>Merchant Mode &mdash; charge &amp; settle</span>
+          <span class="demo-badge">Illustrative data</span>
+        </div>
+        <div class="body" style="display:grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); font-family: var(--sans);">
+          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
+            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">New charge</p>
+            <p style="font-family: var(--mono); font-size: var(--fs-5); margin-bottom: var(--s2);">$14.50</p>
+            <div class="seg" style="margin-bottom: var(--s2);" aria-hidden="true">
+              <button type="button" aria-pressed="true">USDC</button>
+              <button type="button" aria-pressed="false">BTC</button>
+              <button type="button" aria-pressed="false">ETH</button>
+              <button type="button" aria-pressed="false">SOL</button>
+            </div>
+            <dl class="kv" style="font-size: var(--fs-0);">
+              <dt>Settlement</dt><dd>Auto-convert above $2,500 balance</dd>
+              <dt>Refund unit</dt><dd>Fiat value at sale, pinned</dd>
+              <dt>All-in cost</dt><dd>&asymp; 68 bps (demo) vs 2.6% + 10&cent; card</dd>
+            </dl>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
+            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Rewards configurator</p>
+            <dl class="kv" style="font-size: var(--fs-0);">
+              <dt>Offer</dt><dd>2% back in USDC on stablecoin payments</dd>
+              <dt>Funded by</dt><dd>Merchant margin &mdash; shown, not hidden</dd>
+              <dt>Cost per redemption</dt><dd>&asymp; 200 bps, capped at margin floor (demo)</dd>
+              <dt>Break-even</dt><dd>1.4 extra visits / customer / quarter (demo)</dd>
+            </dl>
+          </div>
+        </div>
+        <figcaption>Merchant Mode, recreated in-page from the prototype &mdash; not a screenshot. Numbered notes below point at decisions, not features.</figcaption>
+      </figure>
+
+      <ol class="callouts">
+        <li><strong>USDC is the default asset, volatile assets are opt-in.</strong> Volatility is the merchant&rsquo;s enemy, not their marketing plan &mdash; the default protects the margin before the merchant knows to ask.</li>
+        <li><strong>Settlement policy is set at configuration, not at month-end.</strong> The auto-convert threshold is the same decision Parity later expanded into a full treasury surface &mdash; this is where I first hit it.</li>
+        <li><strong>The refund unit is pinned at sale time</strong> &mdash; fiat value, recorded on the receipt. When the price moves later, the answer to &ldquo;refund in what?&rdquo; already exists. Deciding early is the whole feature.</li>
+        <li><strong>Rewards show their cost in basis points at config time.</strong> On card rails, interchange quietly funds rewards. Here the merchant funds them &mdash; so the configurator prices each redemption against a margin floor instead of letting generosity become a surprise.</li>
+      </ol>
+
+      <figure class="artifact">
+        <div class="chrome">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>User Wallet &mdash; pay &amp; earn</span>
+          <span class="demo-badge">Illustrative data</span>
+        </div>
+        <div class="body" style="display:grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); font-family: var(--sans);">
+          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
+            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Balance</p>
+            <p style="font-family: var(--mono); font-size: var(--fs-5); margin-bottom: 4px;">$482.10</p>
+            <p style="font-size: var(--fs-0); color: var(--text-dim); margin-bottom: var(--s2);">USDC 431.02 &middot; BTC 0.0004 &middot; SOL 1.2 (demo)</p>
+            <dl class="kv" style="font-size: var(--fs-0);">
+              <dt>Rewards earned</dt><dd>$12.40 &mdash; shown in dollars, not tokens</dd>
+              <dt>Last receipt</dt><dd>$14.50 &middot; line items attached</dd>
+            </dl>
+          </div>
+          <div style="border:1px solid var(--border); border-radius:4px; padding: var(--s3); background: var(--bg-raised);">
+            <p style="font-size: var(--fs-0); color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-weight:600; margin-bottom: var(--s2);">Receipt detail</p>
+            <dl class="kv" style="font-size: var(--fs-0);">
+              <dt>Americano ×2</dt><dd>$9.00</dd>
+              <dt>Croissant</dt><dd>$5.50</dd>
+              <dt>Paid</dt><dd>14.49 USDC &middot; tx finalised 4s (demo)</dd>
+              <dt>Refund window</dt><dd>30 days at fiat value</dd>
+            </dl>
+          </div>
+        </div>
+        <figcaption>User Wallet, recreated in-page. The receipt is the quiet centrepiece.</figcaption>
+      </figure>
+
+      <ol class="callouts" start="5" style="counter-reset: co 4;">
+        <li><strong>Rewards display in dollars, not tokens.</strong> A reward you can&rsquo;t price isn&rsquo;t a reward; it&rsquo;s a lottery ticket. Dollar display is the practice-first belief applied to incentives.</li>
+        <li><strong>Every payment carries line-item data.</strong> The enriched-data parallel made literal: structured receipt data travels with the transaction, and the merchant&rsquo;s acceptance pricing improves because of it. Data for basis points &mdash; the oldest trade on card rails, ported to the new one.</li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Success criteria</p>
+      <h2 style="max-width: 26ch;">Signups are theatre. Week thirteen is the truth.</h2>
+      <p style="max-width: var(--prose);">The obvious metrics &mdash; merchants signed, wallets downloaded, gross crypto volume &mdash; all inflate with incentives and say nothing about whether acceptance survived contact with a real quarter of trading. One whale transaction distorts volume for a month. The north star is boring on purpose: merchants still accepting weekly, ninety days in, without a rep on the phone.</p>
+      <div class="overflow-x">
+        <table class="metric-table">
+          <thead><tr><th scope="col">Metric</th><th scope="col">What it tells you</th><th scope="col">Note</th></tr></thead>
+          <tbody>
+            <tr class="north"><td>Active acceptance at day 90</td><td>Merchants transacting weekly a quarter after onboarding &mdash; economics and operations both held.</td><td>North star; immune to launch-week theatre.</td></tr>
+            <tr><td>Activation rate</td><td>Onboarded &rarr; first live charge. Measures setup friction only.</td><td>Diagnostic, never the headline.</td></tr>
+            <tr><td>Rewards redemption rate</td><td>Whether the loop that funds acceptance is actually looping.</td><td>Low = dead weight cost; high + margin floor = working.</td></tr>
+            <tr><td>Settlement mix</td><td>Share kept as stablecoin vs auto-converted &mdash; trust in the instrument, revealed not asked.</td><td>Feeds Parity&rsquo;s treasury question.</td></tr>
+            <tr><td>Refund incidence &amp; resolution time</td><td>Whether pinned-at-sale refund semantics survive real disputes.</td><td>The first place the missing rail will hurt.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">What I got wrong &middot; what&rsquo;s next</p>
+      <div class="wrong-block">
+        <h3>What I got wrong</h3>
+        <ul>
+          <li><strong>I led with asset breadth.</strong> Four assets at launch read as ambition; in practice BTC, ETH and SOL acceptance complicated refunds, accounting and the pitch itself. Stablecoin-first with volatile assets as an opt-in flourish is the honest architecture &mdash; the prototype&rsquo;s default hides what its asset list confesses.</li>
+          <li><strong>The first rewards design ignored who pays.</strong> I copied card-style &ldquo;2% back&rdquo; without copying the thing that funds it. On card rails that&rsquo;s interchange; here it&rsquo;s the merchant&rsquo;s margin. The configurator&rsquo;s margin floor exists because version one let a demo merchant configure themselves into losing money on every sale.</li>
+          <li><strong>Refunds were an afterthought until they were the whole problem.</strong> &ldquo;Send the tokens back&rdquo; fails the moment price moves. Pinning refund value at sale was retrofitted, and it decides who loses on the move &mdash; a loss-allocation question I should have recognised on sight, given where I work.</li>
+        </ul>
+      </div>
+      <p style="margin-top: var(--s4); max-width: var(--prose);"><strong>What I&rsquo;d do next:</strong> run the program lifecycle on it properly &mdash; discovery with a merchant segment where card economics genuinely pinch (small-ticket, high-frequency), a POC gated on the day-90 north star, and a scale/no-scale case built on the settlement-mix data. That exercise is written up as its own page: <a href="../../how-i-run-programs/">how I run programs</a>.</p>
+      <p style="margin-top: var(--s3);"><a class="btn" href="https://lovable.dev/preview/2PPeMp5KfySdjx2olWqeOC2v9u5gUVrz" target="_blank" rel="noopener">Open the live prototype &#8599;</a></p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container inner">
+    <p>Concept prototype &mdash; illustrative data throughout; nothing shipped, had users, or was commissioned.</p>
+    <p><a href="../defilend/">Next: DeFiLend &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>
