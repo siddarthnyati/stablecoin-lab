@@ -187,6 +187,69 @@ code { font-family: var(--mono); font-size: 0.88em; background: var(--bg-raised)
 .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
 .btn.primary:hover { background: #fff; }
 
+/* ---- visual tiles (homepage v3) ----------------------------------------- */
+
+.vgrid { display: grid; gap: var(--s2); grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 760px) { .vgrid { grid-template-columns: 1fr; } }
+
+.vtile {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--bg-raised); overflow: hidden;
+  text-decoration: none;
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+a.vtile:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.vtile .thumb { position: relative; aspect-ratio: 8 / 5; background: var(--bg-inset); border-bottom: 1px solid var(--border); overflow: hidden; }
+.vtile .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+a.vtile:hover .thumb img { opacity: 0.95; }
+.vtile .thumb .flag {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-dim);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border: 1px solid var(--border-strong); border-radius: 999px; padding: 3px 10px;
+  backdrop-filter: blur(6px);
+}
+.vtile .thumb .flag.hot { color: var(--accent); }
+.vtile .meta-row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2);
+  padding: var(--s2) var(--s3) var(--s3);
+}
+.vtile .meta-row h2 { font-size: var(--fs-3); margin: 0; }
+.vtile .meta-row .sub { font-family: var(--sans); font-size: var(--fs-0); color: var(--text-faint); white-space: nowrap; }
+.vtile .oneline { font-family: var(--serif); font-size: var(--fs-1); color: var(--text-dim); margin: 0; padding: 0 var(--s3) var(--s3); }
+
+/* interactive rails thumb (tile 1) */
+.rails-play { cursor: crosshair; }
+.rails-play svg { width: 100%; height: 100%; display: block; }
+.rails-play .torch {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 200ms ease;
+  background: radial-gradient(140px circle at var(--tx, 50%) var(--ty, 50%), rgba(226,179,60,0.14), transparent 70%);
+}
+.rails-play:hover .torch { opacity: 1; }
+.rails-play .qa { opacity: 0; transition: opacity 180ms ease; }
+.rails-play .qa.lit { opacity: 1; }
+.rails-play .dotc { transition: r 150ms ease; }
+@media (prefers-reduced-motion: reduce) {
+  .rails-play .qa { opacity: 1; }
+  .rails-play .torch { display: none; }
+}
+
+/* secondary strip */
+.substrip { display: grid; gap: var(--s2); grid-template-columns: repeat(3, 1fr); margin-top: var(--s2); }
+@media (max-width: 760px) { .substrip { grid-template-columns: 1fr; } }
+.subcard {
+  display: flex; flex-direction: column; gap: var(--s2);
+  border: 1px solid var(--border); border-radius: 6px; background: var(--bg-raised);
+  padding: var(--s3); text-decoration: none; justify-content: space-between;
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+a.subcard:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.subcard h2 { font-size: var(--fs-2); font-family: var(--sans); font-weight: 600; margin: 0; }
+.subcard .k { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0; }
+.subcard img { border-radius: 3px; border: 1px solid var(--border); }
+
 /* ---- bento tiles (homepage) -------------------------------------------- */
 
 .bento { display: grid; gap: var(--s2); grid-template-columns: repeat(4, 1fr); }

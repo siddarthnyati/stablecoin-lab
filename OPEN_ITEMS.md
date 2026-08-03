@@ -37,6 +37,13 @@ build/deploy decisions awaiting the owner.
 9. **Lighthouse** — run locally (see README). If the score reads below 95 on
    performance or accessibility in your environment, file the failing audit here.
 
+10. **Prototype thumbnails** — `assets/shots/*.jpg` were captured 2026-08-03 from the
+    four Lovable preview links via headless Chrome (the previews resolve to tokenized
+    `id-preview--*.lovable.app` URLs; tokens expire, so re-capturing later needs the
+    `lovable.dev/preview/...` links again). Each thumbnail is framed, flagged
+    "Prototype · demo data", and alt-texted as illustrative. If a prototype's landing
+    screen changes, re-capture for freshness.
+
 ## Build decisions made under autonomy (flagging, not asking)
 
 - Site name/wordmark is simply "Siddarth Nyati"; POC 5 kept the working name
