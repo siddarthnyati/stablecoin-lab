@@ -77,6 +77,13 @@ build/deploy decisions awaiting the owner.
     with illustrative data throughout — nothing shipped, had users, or was
     commissioned") remains on every page and now carries the §7 duty alone.
     The /about "two rules" paragraph was also removed by owner direction.
+16b. **DeFiLend live embed restored via PUBLISHED app (2026-08-03)** — discovered
+    `https://aave-reimagined-nyati.lovable.app` is already published and serves
+    with no X-Frame-Options and no frame-ancestors: embeddable anywhere,
+    permanent, token-free. DeFiLend's case page now embeds it by default and
+    all its links point there. **Publish the other three projects in Lovable**
+    (CryptoPos, Coinbase concept, NFT marketplace) and send the URLs to get the
+    same treatment — until then those pages keep slideshows + preview links.
 16a. **Live embeds reverted (2026-08-03)** — Lovable's inner app sends a
     frame-ancestors policy that rejects any ancestor chain outside lovable.dev,
     so in-page embeds show "refused to connect" in real browsers (my preview
