@@ -44,6 +44,11 @@ build/deploy decisions awaiting the owner.
     "Prototype · demo data", and alt-texted as illustrative. If a prototype's landing
     screen changes, re-capture for freshness.
 
+11. **Tax card in the homepage career arc** — the owner stated the tax → healthcare
+    → payments arc directly; the tax step is written without employer, product, or
+    numbers because none were provided. Supply one line (org + a real outcome) to
+    match the healthcare and payments cards.
+
 ## Build decisions made under autonomy (flagging, not asking)
 
 - Site name/wordmark is simply "Siddarth Nyati"; POC 5 kept the working name
