@@ -187,6 +187,80 @@ code { font-family: var(--mono); font-size: 0.88em; background: var(--bg-raised)
 .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
 .btn.primary:hover { background: #fff; }
 
+/* ---- bento tiles (homepage) -------------------------------------------- */
+
+.bento { display: grid; gap: var(--s2); grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 980px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .bento { grid-template-columns: 1fr; } }
+
+.tile {
+  display: flex; flex-direction: column; gap: var(--s2);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-raised); padding: var(--s3);
+  text-decoration: none; min-height: 200px;
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+a.tile:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.tile .kicker {
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint);
+  display: flex; justify-content: space-between; gap: var(--s2); margin: 0;
+}
+.tile .kicker .live { color: var(--accent); }
+.tile h2 { font-size: var(--fs-3); margin: 0; }
+.tile .line { font-family: var(--serif); font-size: var(--fs-1); color: var(--text-dim); margin: 0; }
+.tile .peek { margin-top: auto; font-family: var(--sans); font-size: var(--fs-0); color: var(--text-dim); }
+.tile .go { font-family: var(--sans); font-size: var(--fs-0); color: var(--text-faint); }
+a.tile:hover .go { color: var(--text); }
+.tile.span2 { grid-column: span 2; }
+@media (max-width: 560px) { .tile.span2 { grid-column: span 1; } }
+
+/* fit tile rows */
+.fitmap { display: flex; flex-direction: column; margin: 0; }
+.fitmap a {
+  display: grid; grid-template-columns: 1fr auto; gap: var(--s2); align-items: baseline;
+  padding: 5px 0; border-bottom: 1px solid var(--border);
+  font-family: var(--sans); font-size: var(--fs-0);
+  color: var(--text-dim); text-decoration: none;
+}
+.fitmap a:last-child { border-bottom: 0; }
+.fitmap a b { color: var(--text); font-weight: 600; }
+.fitmap a span:last-child { color: var(--text-faint); white-space: nowrap; }
+.fitmap a:hover span:last-child { color: var(--accent); }
+
+/* tile peek widgets */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips i {
+  font-style: normal; font-family: var(--sans); font-size: 11px; font-weight: 600;
+  border: 1px solid var(--border-strong); border-radius: 999px; padding: 2px 9px;
+  color: var(--text-dim);
+}
+.chips i.hot { border-color: var(--accent); color: var(--accent); }
+.mini-bars { display: grid; gap: 6px; }
+.mini-bars .r { display: grid; grid-template-columns: 96px 1fr 52px; gap: 8px; align-items: center; }
+.mini-bars .r em { font-style: normal; font-weight: 600; }
+.mini-bars .t { height: 7px; background: var(--bg-inset); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+.mini-bars .t b { display: block; height: 100%; background: var(--text-faint); }
+.mini-bars .r.win .t b { background: var(--accent); }
+.mini-bars .n { font-family: var(--mono); text-align: right; font-size: 12px; }
+.gate-dots { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--text-faint); flex-wrap: wrap; }
+.gate-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--accent); }
+.flow-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--text-dim); }
+.flow-chips i { font-style: normal; border: 1px solid var(--border-strong); border-radius: 999px; padding: 2px 9px; }
+.flow-chips span { color: var(--text-faint); }
+
+/* identity strip above the grid */
+.identity { padding: var(--s4) 0 var(--s3); }
+.identity .cols { display: grid; gap: var(--s3) var(--s6); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 980px) { .identity .cols { grid-template-columns: 1.05fr 1fr; } }
+.identity .who {
+  font-family: var(--sans); font-size: var(--fs-1); color: var(--text-dim);
+  display: flex; flex-wrap: wrap; gap: var(--s1) var(--s2); align-items: center; margin: 0 0 var(--s2);
+}
+.identity .who b { color: var(--text); font-weight: 600; letter-spacing: 0.02em; }
+.identity h1 { font-size: clamp(var(--fs-4), 3.4vw, var(--fs-5)); max-width: 22ch; margin-bottom: 0; }
+.identity .thesis { font-size: var(--fs-1); line-height: 1.6; color: var(--text-dim); max-width: 62ch; margin: 0; }
+
 /* ---- POC cards --------------------------------------------------------- */
 
 .card-grid { display: grid; gap: var(--s2); grid-template-columns: 1fr; }

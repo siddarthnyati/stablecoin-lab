@@ -32,15 +32,136 @@
 
 <main id="main">
 
-  <!-- ============================== hero ============================== -->
-  <section class="section" style="padding-bottom: var(--s5);">
+  <!-- ======================= identity (the About lead) ======================= -->
+  <section class="identity">
     <div class="container">
-      <p class="eyebrow">Crypto &amp; stablecoin portfolio</p>
-      <h1 style="max-width: 17ch;">Stablecoins are a rails change, not a problem change.</h1>
-      <p class="lede" style="margin-top: var(--s3);">Whoever moves money still has to answer the three questions card networks spent thirty years on: <em>is this credential real, is this person real, and who eats the loss when it isn&rsquo;t.</em> I spent the last year on exactly those questions inside Visa&rsquo;s 3DS platform &mdash; network tokenization, passkey authentication, enriched authorization data, merchant acceptance economics. These are the same questions, asked on the other side of the rail.</p>
-      <p class="page-badge"><span class="demo-badge">Concept prototype &mdash; illustrative data</span></p>
+      <p class="who">
+        <b>Siddarth Nyati</b>
+        <span>&middot;&nbsp; Product manager, Visa&rsquo;s 3DS platform &mdash; tokenization, passkeys, acceptance economics</span>
+        <span class="demo-badge">Concept prototype &mdash; illustrative data</span>
+      </p>
+      <div class="cols">
+        <h1>Stablecoins are a rails change, not a problem change.</h1>
+        <p class="thesis">Whoever moves money still has to answer the three questions card networks spent thirty years on: <em>is this credential real, is this person real, and who eats the loss when it isn&rsquo;t.</em> I spent the last year on exactly those questions inside Visa&rsquo;s 3DS platform &mdash; network tokenization, passkey authentication, enriched authorization data, merchant acceptance economics. These are the same questions, asked on the other side of the rail. The tiles below are the evidence.</p>
+      </div>
+    </div>
+  </section>
 
-      <!-- ====================== the rails diagram ====================== -->
+  <!-- ============================ the tiles ============================ -->
+  <section style="padding-bottom: var(--s6);">
+    <div class="container">
+      <div class="bento">
+
+        <!-- 1 · the fit tile -->
+        <div class="tile span2">
+          <p class="kicker"><span>The role</span><span>Manager, Stablecoin Labs &middot; REF077615W</span></p>
+          <h2>Why this portfolio fits the req</h2>
+          <nav class="fitmap" aria-label="Requisition mapped to evidence">
+            <a href="work/stablecoin-settle/"><span><b>Stablecoin mechanics</b> &mdash; reserves, custody, mint/burn, settlement</span><span>Parity &rarr;</span></a>
+            <a href="#work"><span><b>POCs with success criteria</b> &mdash; each with a north star and a &ldquo;what I got wrong&rdquo;</span><span>5 case studies &rarr;</span></a>
+            <a href="how-i-run-programs/"><span><b>Discovery &rarr; validation &rarr; scale/no-scale</b> &mdash; gates, risks, KPI tree</span><span>Method &rarr;</span></a>
+            <a href="work/defilend/"><span><b>Web3 &amp; DeFi fluency</b> &mdash; Aave re-read, NFT credit, wallet UX</span><span>DeFiLend &rarr;</span></a>
+            <a href="from-card-rails/"><span><b>New tech &times; legacy rails</b> &mdash; the background that transfers</span><span>From card rails &rarr;</span></a>
+          </nav>
+        </div>
+
+        <!-- 2 · Parity, live peek -->
+        <a class="tile span2" href="work/stablecoin-settle/" id="work">
+          <p class="kicker"><span>POC 5 &middot; Settlement economics</span><span class="live">Interactive</span></p>
+          <h2>Parity &mdash; the thirty seconds after acceptance</h2>
+          <p class="line">Hold, convert, or split &mdash; priced against interchange. Six calculators: settlement, reserves, mint/burn, custody, disputes, treasury.</p>
+          <div class="peek" aria-hidden="true">
+            <div class="mini-bars">
+              <div class="r"><em>Card rails</em><span class="t"><b style="width:100%"></b></span><span class="n">2.85%</span></div>
+              <div class="r win"><em>USDC &middot; convert</em><span class="t"><b style="width:23%"></b></span><span class="n">0.65%</span></div>
+              <div class="r"><em>USDC &middot; hold</em><span class="t"><b style="width:4%"></b></span><span class="n">0.05%*</span></div>
+            </div>
+            <span class="go" style="display:block; margin-top:8px;">*illustrative &mdash; and &ldquo;hold&rdquo; is never free. Open the console &rarr;</span>
+          </div>
+        </a>
+
+        <!-- 3-6 · POC tiles -->
+        <a class="tile" href="work/defilend/">
+          <p class="kicker"><span>POC 1</span><span>Aave reimagined</span></p>
+          <h2>DeFiLend</h2>
+          <p class="line">Borrowing isn&rsquo;t broken &mdash; it&rsquo;s biased. Five gaps between DeFi&rsquo;s power users and everyone else.</p>
+          <div class="peek chips" aria-hidden="true">
+            <i class="hot">Practice</i><i>Onboarding</i><i>Insurance</i><i>Automation</i><i>Social</i>
+          </div>
+          <span class="go">Notes + prototype &rarr;</span>
+        </a>
+
+        <a class="tile" href="work/cryptopos/">
+          <p class="kicker"><span>POC 2</span><span>Merchant acceptance</span></p>
+          <h2>CryptoPos</h2>
+          <p class="line">Acceptance fails on economics, not technology &mdash; so the POS shows the economics at the counter.</p>
+          <div class="peek" aria-hidden="true">
+            <span style="font-family:var(--mono); font-size: var(--fs-2);">$14.50 &rarr; USDC</span><br>
+            <span class="go">&asymp;68 bps all-in vs 2.6%+10&cent; card &middot; demo</span>
+          </div>
+          <span class="go">Case study &rarr;</span>
+        </a>
+
+        <a class="tile" href="work/nft-lending/">
+          <p class="kicker"><span>POC 4</span><span>Thin-file underwriting</span></p>
+          <h2>NFT lending</h2>
+          <p class="line">Collateral with no reliable price: price the exit, not the asset.</p>
+          <div class="peek" aria-hidden="true" style="font-family:var(--mono); font-size:12px; display:grid; gap:4px;">
+            <span>raw floor&nbsp;&nbsp;10.0 &Xi; &mdash; distrusted</span>
+            <span>oracle mark&nbsp;8.6 &Xi; &middot; max LTV 35% &middot; demo</span>
+          </div>
+          <span class="go">Oracle &amp; liquidation design &rarr;</span>
+        </a>
+
+        <a class="tile" href="work/coinbase/">
+          <p class="kicker"><span>POC 3</span><span>Retail experience</span></p>
+          <h2>Coinbase, re-read</h2>
+          <p class="line">The product line is complete; the experience isn&rsquo;t. Paths, not products.</p>
+          <div class="peek flow-chips" aria-hidden="true">
+            <i>discover</i><span>&rarr;</span><i>understand</i><span>&rarr;</span><i class="hot" style="border-color:var(--accent); color:var(--accent);">practise</i><span>&rarr;</span><i>fund</i>
+          </div>
+          <span class="go">Case study &rarr;</span>
+        </a>
+
+        <!-- 7-8 · method + POV -->
+        <a class="tile span2" href="how-i-run-programs/">
+          <p class="kicker"><span>Method</span><span>Program lifecycle</span></p>
+          <h2>How I run programs</h2>
+          <p class="line">Discovery &rarr; POC &rarr; validation &rarr; scale/no-scale, with kill criteria at every gate &mdash; milestone map, dependency graph, risk register, KPI tree.</p>
+          <div class="peek gate-dots" aria-hidden="true">
+            <i></i>G1<i></i>G2<i></i>G3<i></i>G4<i></i>G5<i></i>G6<i></i>G7
+            <span style="margin-left:8px;">seven review gates &middot; 104 acceptance criteria</span>
+          </div>
+        </a>
+
+        <a class="tile span2" href="from-card-rails/">
+          <p class="kicker"><span>Point of view</span><span>Thought leadership</span></p>
+          <h2>One transaction, two rails, three questions</h2>
+          <p class="line">Why thirty years of card infrastructure is a library of answers to the questions stablecoin products are now discovering.</p>
+          <div class="peek" aria-hidden="true">
+            <svg viewBox="0 0 560 64" xmlns="http://www.w3.org/2000/svg" style="max-width:420px; display:block;">
+              <line x1="0" y1="18" x2="560" y2="18" stroke="#3a4048" stroke-width="1.2"/>
+              <circle cx="330" cy="18" r="5" fill="#e2b33c"/>
+              <circle cx="420" cy="18" r="5" fill="#e2b33c"/>
+              <circle cx="510" cy="18" r="5" fill="#e2b33c"/>
+              <line x1="0" y1="48" x2="560" y2="48" stroke="#3a4048" stroke-width="1.2" stroke-dasharray="4 5"/>
+              <circle cx="330" cy="48" r="5" fill="none" stroke="#e2b33c" stroke-width="1.5"/>
+              <circle cx="420" cy="48" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+              <circle cx="510" cy="48" r="5" fill="none" stroke="#7d8590" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="go">Read the argument &rarr;</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== the rails diagram, in full ====================== -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">The thesis, drawn</p>
+      <h2 style="max-width: 26ch;">The same payment, on both rails.</h2>
       <figure class="rails" role="img" aria-label="Diagram: the same transaction traversing card rails and stablecoin rails. On card rails, three questions are answered — credential validity at the network token vault, person validity at the issuer via EMV 3DS and passkey, and loss allocation by chargeback and liability rules. On stablecoin rails, a signature proves the key but not the holder, no identity layer exists, and no dispute rail exists — the loss stays where it lands.">
         <svg viewBox="0 0 960 404" xmlns="http://www.w3.org/2000/svg">
           <title>One transaction, two rails, three questions</title>
@@ -49,12 +170,8 @@
               <path d="M0,0.6 L7.4,4 L0,7.4" fill="none" stroke="#737d89" stroke-width="1.2"/>
             </marker>
           </defs>
-
-          <!-- lane labels -->
           <text class="lane-label" x="10" y="34">Card rail</text>
           <text class="lane-label" x="10" y="282">Stablecoin rail</text>
-
-          <!-- card rail nodes -->
           <g class="node">
             <rect x="35"  y="56" width="150" height="56"/>
             <text x="110" y="79" text-anchor="middle">Cardholder</text>
@@ -84,37 +201,27 @@
           <line class="flow" x1="377" y1="84" x2="412" y2="84" marker-end="url(#arr)"/>
           <line class="flow" x1="567" y1="84" x2="602" y2="84" marker-end="url(#arr)"/>
           <line class="flow" x1="757" y1="84" x2="792" y2="84" marker-end="url(#arr)"/>
-
-          <!-- card rail answer dots -->
           <circle class="q-dot" cx="490" cy="128" r="7"/>
           <text class="q-label on" x="490" y="149" text-anchor="middle">token vault + cryptogram</text>
           <circle class="q-dot" cx="680" cy="128" r="7"/>
           <text class="q-label on" x="680" y="149" text-anchor="middle">EMV 3DS &middot; passkey</text>
           <circle class="q-dot" cx="870" cy="128" r="7"/>
           <text class="q-label on" x="930" y="149" text-anchor="end">liability rules decide</text>
-
-          <!-- the three questions -->
           <line class="flow dashed" x1="395" y1="190" x2="483" y2="137" opacity="0.55"/>
           <line class="flow dashed" x1="395" y1="212" x2="307" y2="286" opacity="0.55"/>
           <text class="q-title" x="395" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q1</tspan> &middot; Is the credential real?</text>
-
           <line class="flow dashed" x1="585" y1="190" x2="673" y2="137" opacity="0.55"/>
           <line class="flow dashed" x1="585" y1="212" x2="497" y2="286" opacity="0.55"/>
           <text class="q-title" x="585" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q2</tspan> &middot; Is this person real?</text>
-
           <line class="flow dashed" x1="835" y1="190" x2="863" y2="137" opacity="0.55"/>
           <line class="flow dashed" x1="835" y1="212" x2="807" y2="286" opacity="0.55"/>
           <text class="q-title" x="835" y="206" text-anchor="middle"><tspan fill="#e2b33c">Q3</tspan> &middot; Who eats the loss?</text>
-
-          <!-- stablecoin rail answer dots -->
           <circle class="q-dot half" cx="300" cy="294" r="7"/>
           <text class="q-label" x="300" y="278" text-anchor="middle">proves the key, not the holder</text>
           <circle class="q-dot hollow" cx="490" cy="294" r="7"/>
           <text class="q-label" x="512" y="278" text-anchor="middle">open &mdash; merchant&rsquo;s problem</text>
           <circle class="q-dot hollow" cx="800" cy="294" r="7"/>
           <text class="q-label" x="800" y="278" text-anchor="middle">open &mdash; loss stays where it lands</text>
-
-          <!-- stablecoin rail nodes -->
           <g class="node">
             <rect x="35"  y="308" width="150" height="56"/>
             <text x="110" y="331" text-anchor="middle">Payer wallet</text>
@@ -152,7 +259,7 @@
         <span class="half"><i></i> partially &mdash; cryptography, not identity</span>
         <span class="open"><i></i> open question</span>
       </div>
-      <p class="note" style="margin-top: var(--s2);">The same payment on both rails. Thirty years of card infrastructure exists to fill the amber dots; the hollow ones are the work.</p>
+      <p class="note" style="margin-top: var(--s2);">Thirty years of card infrastructure exists to fill the amber dots; the hollow ones are the work.</p>
     </div>
   </section>
 
@@ -177,63 +284,15 @@
     </div>
   </section>
 
-  <!-- ============================ the work ============================ -->
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">The work</p>
-      <h2 style="max-width: 24ch;">Five proofs of concept, one interactive.</h2>
-      <div class="card-grid" style="margin-top: var(--s5);">
-        <a class="poc-card featured reveal" href="work/stablecoin-settle/">
-          <p class="kicker"><span>POC 5 &middot; Settlement economics</span></p>
-          <h3>Parity</h3>
-          <p>Accepting a stablecoin takes thirty seconds. Deciding what to do with the balance afterwards &mdash; hold, convert, sweep, refund &mdash; is the actual product, and nobody builds for it. An interactive walk through settlement cost, reserves, redemption, custody, disputes and treasury.</p>
-          <span class="go">Open the interactive POC &rarr;</span>
-        </a>
-        <a class="poc-card reveal" href="work/cryptopos/">
-          <p class="kicker"><span>POC 2 &middot; Merchant acceptance</span></p>
-          <h3>CryptoPos</h3>
-          <p>Merchant crypto acceptance fails on economics, not technology. A point-of-sale prototype that prices the gap &mdash; and a rewards loop that pays merchants to close it.</p>
-          <span class="go">Read the case study &rarr;</span>
-        </a>
-        <a class="poc-card reveal" href="work/defilend/">
-          <p class="kicker"><span>POC 1 &middot; Aave reimagined</span></p>
-          <h3>DeFiLend</h3>
-          <p>DeFi lending works beautifully for the people who already understand it. Five gaps keep everyone else out &mdash; and each one closes with product, not protocol.</p>
-          <span class="go">Read the case study &rarr;</span>
-        </a>
-        <a class="poc-card reveal" href="work/coinbase/">
-          <p class="kicker"><span>POC 3 &middot; Retail experience</span></p>
-          <h3>Coinbase, re-read</h3>
-          <p>The product line is complete; the retail experience isn&rsquo;t. Discoverability, comprehension and safe practice for the user who is curious but not yet convinced.</p>
-          <span class="go">Read the case study &rarr;</span>
-        </a>
-        <a class="poc-card reveal" href="work/nft-lending/">
-          <p class="kicker"><span>POC 4 &middot; Thin-file underwriting</span></p>
-          <h3>NFT lending</h3>
-          <p>Lending against collateral with no reliable price. The hard parts are oracle design and liquidity, not the interface &mdash; the card-rails parallel is thin-file underwriting.</p>
-          <span class="go">Read the case study &rarr;</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- ========================= point of view ========================= -->
   <section class="section">
     <div class="container">
       <p class="eyebrow">A point of view</p>
       <h2 style="max-width: 26ch;">People don&rsquo;t adopt financial products they can&rsquo;t practise first.</h2>
       <p style="margin-top: var(--s3); color: var(--text-dim);">It surfaced independently in two of these POCs &mdash; a market simulator with virtual assets in DeFiLend, paper trading in the Coinbase concept &mdash; before I noticed it was the same idea twice. Cards solved practice with reversibility: you can try, because someone will make you whole. Crypto rails are irreversible, so practice has to be designed in deliberately. That&rsquo;s a belief I&rsquo;d bring to a stablecoin roadmap, not a coincidence.</p>
-    </div>
-  </section>
-
-  <!-- ============================== CTA ============================== -->
-  <section class="section">
-    <div class="container">
-      <h2 style="max-width: 24ch;">Start with the one you can touch.</h2>
-      <p style="color: var(--text-dim);">Parity is built into this site &mdash; six interactive surfaces on what happens <em>after</em> a merchant accepts USDC.</p>
       <p style="display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s4);">
         <a class="btn primary" href="work/stablecoin-settle/">Open Parity</a>
-        <a class="btn" href="from-card-rails/">Why card rails transfer</a>
+        <a class="btn" href="about/">About &amp; contact</a>
       </p>
     </div>
   </section>
