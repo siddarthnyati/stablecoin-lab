@@ -94,4 +94,4 @@ build/deploy decisions awaiting the owner.
     published apps can then be tested for embeddability.
 16. **Visa (Cardinal/DCAP) and Motional achievement details** are owner-supplied
     resume content, published as provided. Confirm public-shareability of the
-    Cardinal/DCAP program names and figures (8B+, ~5%, 280bps, 50bps, 30% MoM).
+    Cardinal/DCAP program names and figures (8B+, 4.6% published authorization lift, 280bps, 50bps, 30% MoM).
