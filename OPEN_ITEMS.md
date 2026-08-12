@@ -77,6 +77,16 @@ build/deploy decisions awaiting the owner.
     with illustrative data throughout — nothing shipped, had users, or was
     commissioned") remains on every page and now carries the §7 duty alone.
     The /about "two rules" paragraph was also removed by owner direction.
+17. **Dead prototype links removed (2026-08-11)** — the three `lovable.dev/preview/...`
+    links (CryptoPos, Coinbase, NFT lending) were Lovable *editor-session* URLs and
+    returned **404 for every visitor**; they only ever resolved while the owner was
+    logged in. Buttons replaced with an honest caption plus a pointer to DeFiLend,
+    the one prototype published at a permanent URL. **To restore each button: hit
+    Publish in Lovable, then paste the `https://<name>.lovable.app` URL into the
+    commented template left in each case page's `.proto-open` block.** Probing for
+    already-published siblings found nothing (note: `cryptopos.lovable.app` exists
+    but is an unrelated third party's app — do not link it).
+
 16b. **DeFiLend live embed restored via PUBLISHED app (2026-08-03)** — discovered
     `https://aave-reimagined-nyati.lovable.app` is already published and serves
     with no X-Frame-Options and no frame-ancestors: embeddable anywhere,
