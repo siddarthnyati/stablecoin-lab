@@ -429,25 +429,38 @@
 
   /* redemption walk-through */
   var steps = document.querySelectorAll("#redeem-steps li");
+  var stepList = $("redeem-steps");
+  var playBtn = $("redeem-play");
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var playing = false;
-  $("redeem-play").addEventListener("click", function () {
+  playBtn.addEventListener("click", function () {
     if (playing) return;
     playing = true;
-    steps.forEach(function (li) { li.classList.remove("active"); });
+    playBtn.disabled = true;
+    playBtn.textContent = "Redeeming\u2026";
+    stepList.classList.add("playing");
+    steps.forEach(function (li) { li.classList.remove("active"); li.classList.remove("done"); });
     $("supply").textContent = "1,000,000";
     var i = 0;
     function advance() {
-      if (i > 0) steps[i - 1].classList.remove("active");
+      if (i > 0) { steps[i - 1].classList.remove("active"); steps[i - 1].classList.add("done"); }
       if (i >= steps.length) {
         playing = false;
-        steps.forEach(function (li) { li.classList.add("active"); });
+        stepList.classList.remove("playing");
+        playBtn.disabled = false;
+        playBtn.textContent = "Replay redemption";
         return;
       }
       steps[i].classList.add("active");
-      if (i === 2) $("supply").textContent = "950,000";
+      if (i === 2) {
+        var sup = $("supply");
+        sup.textContent = "950,000";
+        sup.classList.remove("flash");
+        void sup.offsetWidth;
+        sup.classList.add("flash");
+      }
       i++;
-      setTimeout(advance, reduced ? 0 : 900);
+      setTimeout(advance, reduced ? 120 : 900);
     }
     advance();
   });

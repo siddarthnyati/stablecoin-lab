@@ -760,7 +760,28 @@ a.tile:hover .go { color: var(--text); }
   font-family: var(--sans); font-size: 12px; font-weight: 600;
   display: flex; align-items: center; justify-content: center; margin-top: 2px;
 }
-.steps li.active::before { border-color: var(--accent); color: var(--accent); }
+.steps li { transition: opacity .3s ease, background-color .3s ease, box-shadow .3s ease; }
+/* during playback, the current step is the only lit one */
+.steps.playing li { opacity: 0.38; }
+.steps.playing li.active,
+.steps.playing li.done { opacity: 1; }
+.steps li.active {
+  background: rgba(226, 179, 60, 0.07);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.steps li.active .who { color: var(--accent); }
+.steps li.active::before {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #0d0e10;
+}
+.steps li.done::before { border-color: var(--accent); color: var(--accent); }
+/* the supply number reacts when the burn lands */
+.value.flash { animation: valflash .9s ease both; }
+@keyframes valflash {
+  0%   { color: var(--accent); transform: scale(1.14); }
+  100% { color: inherit; transform: scale(1); }
+}
 .steps .who {
   grid-column: 2;
   font-weight: 600;
