@@ -761,8 +761,20 @@ a.tile:hover .go { color: var(--text); }
   display: flex; align-items: center; justify-content: center; margin-top: 2px;
 }
 .steps li.active::before { border-color: var(--accent); color: var(--accent); }
-.steps .who { font-weight: 600; }
-.steps .what { color: var(--text-dim); }
+.steps .who {
+  grid-column: 2;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+.steps .what {
+  grid-column: 2;
+  color: var(--text-dim);
+  line-height: 1.55;
+  max-width: 62ch;
+}
+/* the em-dash that opens each description is redundant once stacked */
+.steps .what { text-indent: 0; }
 
 /* choice cards (custody) */
 .choice-grid { display: grid; gap: var(--s2); grid-template-columns: 1fr; }
