@@ -77,6 +77,17 @@ build/deploy decisions awaiting the owner.
     with illustrative data throughout — nothing shipped, had users, or was
     commissioned") remains on every page and now carries the §7 duty alone.
     The /about "two rules" paragraph was also removed by owner direction.
+17b. **Real prototypes self-hosted (2026-08-11)** — resolved properly. The Lovable
+    projects live in the owner's GitHub as `mint-dream-bids` (NFT lending) and
+    `crypto-merchant-rewards-hub` (CryptoPos); both are PRIVATE, so their own Pages
+    sites need a paid plan. Instead they are built from source (Vite/React, router
+    `basename={import.meta.env.BASE_URL}`) and committed into **this** repo under
+    `/proto/nft-lending/` and `/proto/cryptopos/` — permanent, same-origin, no Lovable
+    dependency, and embeddable in-page. Coinbase points at the published
+    `futures-clarity-ui.lovable.app`; DeFiLend at `aave-reimagined-nyati.lovable.app`.
+    To refresh a prototype: pull the repo, `npx vite build --base=/stablecoin-lab/proto/<dir>/`,
+    rsync `dist/` over the folder.
+
 17. **Dead prototype links removed (2026-08-11)** — the three `lovable.dev/preview/...`
     links (CryptoPos, Coinbase, NFT lending) were Lovable *editor-session* URLs and
     returned **404 for every visitor**; they only ever resolved while the owner was
